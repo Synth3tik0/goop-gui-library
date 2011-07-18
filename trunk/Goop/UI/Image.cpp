@@ -23,7 +23,7 @@ Image::~Image()
 void Image::SetBitmap(Bitmap *bitmap)
 {
 	m_bitmap = bitmap;
-	Redraw();
+	InvalidateRect(m_handle, 0, true);
 }
 
 Bitmap *Image::GetBitmap()
@@ -34,8 +34,6 @@ Bitmap *Image::GetBitmap()
 void Image::DrawBitmap()
 {
 	if(m_bitmap != 0) {
-		InvalidateRect(m_handle, 0, true);
-
 		Vector2D imageSize = GetSize();
 		Vector2D bitmapSize = m_bitmap->GetSize();
 
