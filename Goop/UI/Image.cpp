@@ -12,7 +12,7 @@ Image::Image(Bitmap *bitmap, Base *parent) : m_bitmap(0)
 	m_defaultProcess = SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)Base::Process);
 
 	SetParent(parent);
-	SetImage(bitmap);
+	SetBitmap(bitmap);
 }
 
 Image::~Image()
@@ -20,12 +20,12 @@ Image::~Image()
 
 }
 
-void Image::SetImage(Bitmap *bitmap)
+void Image::SetBitmap(Bitmap *bitmap)
 {
 	m_bitmap = bitmap;
 }
 
-Bitmap *Image::GetImage()
+Bitmap *Image::GetBitmap()
 {
 	return m_bitmap;
 }
