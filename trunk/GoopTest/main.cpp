@@ -73,6 +73,11 @@ public:
 	box.SetSize(Vector2D(100, 20));
 	box.SetParent(&window);
 
+	// Image test
+	Image img = Image(&bmp, &window);
+	img.SetPosition(Vector2D(300, 200));
+	img.SetSize(Vector2D(500, 500));
+
 	while(window.IsValid())
 	{
 		window.Update();

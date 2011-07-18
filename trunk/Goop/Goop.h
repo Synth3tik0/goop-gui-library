@@ -16,5 +16,6 @@
 #include "UI\Menu.h"
 #include "UI\Textbox.h"
 #include "UI\Radio.h"
+#include "UI\Image.h"
 
 #endif
