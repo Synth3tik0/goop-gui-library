@@ -23,7 +23,7 @@ Window::Window(const wchar_t *title, Vector2D size) : m_menu(0)
 
 	DWORD ExStyle = NULL;
 
-	m_handle = (HWND)CreateWindowEx(ExStyle, L"GoopWindow", L"", WS_CLIPCHILDREN | WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, size.m_x, size.m_y, NULL, NULL, hInst, NULL);
+	m_handle = (HWND)CreateWindowEx(ExStyle, L"GoopWindow", L"", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, size.m_x, size.m_y, NULL, NULL, hInst, NULL);
 	m_size = size;
 
 	InitializeBase();

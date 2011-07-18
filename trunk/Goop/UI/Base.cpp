@@ -83,6 +83,7 @@ void Base::AddChild(Base *child)
 	{
 		m_children.push_back(child);
 	}
+	Redraw();
 }
 
 void Base::RemoveChild(Base *child)
@@ -99,6 +100,7 @@ void Base::RemoveChild(Base *child)
 			break;
 		}
 	}
+	Redraw();
 }
 
 Base *Base::GetParent()
@@ -190,7 +192,6 @@ void Base::Destroy()
 void Base::Redraw()
 {
 	::InvalidateRect(m_handle, 0, true);
-	::UpdateWindow(m_handle);
 }
 
 DWORD Base::GetStyle()
@@ -448,6 +449,7 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				{
 					element->OnResize(Vector2D(pos->cx, pos->cy));
 				}
+
 				break;
 			}
 		case WM_KILLFOCUS:

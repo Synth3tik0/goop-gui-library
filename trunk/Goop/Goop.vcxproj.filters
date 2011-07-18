@@ -56,6 +56,9 @@
     <ClInclude Include="UI\Image.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Group.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Goop.cpp">
@@ -98,6 +101,9 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\Image.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Group.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
