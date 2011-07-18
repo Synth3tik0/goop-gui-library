@@ -83,7 +83,6 @@ void Base::AddChild(Base *child)
 	{
 		m_children.push_back(child);
 	}
-	Redraw();
 }
 
 void Base::RemoveChild(Base *child)
@@ -100,7 +99,6 @@ void Base::RemoveChild(Base *child)
 			break;
 		}
 	}
-	Redraw();
 }
 
 Base *Base::GetParent()
