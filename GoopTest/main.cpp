@@ -41,13 +41,18 @@ public:
 	button.SetPosition(Vector2D(200, 150));
 	button.SetSize(Vector2D(200, 30));
 
+	// Radio group test
+	Group group = Group(TEXT("My Radio Group"), &window);
+	group.SetPosition(Vector2D(200, 30));
+	group.SetSize(Vector2D(200, 100));
+
 	// Radio button test
-	Radio button1 = Radio(TEXT("My button!"), &window);
-	button1.SetPosition(Vector2D(200, 70));
+	Radio button1 = Radio(TEXT("My button!"), &group);
+	button1.SetPosition(Vector2D(10, 30));
 	button1.SetSize(Vector2D(100, 25));
 
-	Radio button2 = Radio(TEXT("Also button!"), &window);
-	button2.SetPosition(Vector2D(200, 90));
+	Radio button2 = Radio(TEXT("Also button!"), &group);
+	button2.SetPosition(Vector2D(10, 50));
 	button2.SetSize(Vector2D(100, 25));
 	button2.SetChecked(true);
 

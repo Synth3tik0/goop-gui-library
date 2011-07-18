@@ -80,6 +80,7 @@
     <ClInclude Include="MessageProxy.h" />
     <ClInclude Include="UI\Base.h" />
     <ClInclude Include="UI\Button.h" />
+    <ClInclude Include="UI\Group.h" />
     <ClInclude Include="UI\Image.h" />
     <ClInclude Include="UI\Label.h" />
     <ClInclude Include="UI\Menu.h" />
@@ -95,6 +96,7 @@
     <ClCompile Include="MessageProxy.cpp" />
     <ClCompile Include="UI\Base.cpp" />
     <ClCompile Include="UI\Button.cpp" />
+    <ClCompile Include="UI\Group.cpp" />
     <ClCompile Include="UI\Image.cpp" />
     <ClCompile Include="UI\Label.cpp" />
     <ClCompile Include="UI\Menu.cpp" />

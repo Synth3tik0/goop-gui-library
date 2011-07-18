@@ -17,5 +17,6 @@
 #include "UI\Textbox.h"
 #include "UI\Radio.h"
 #include "UI\Image.h"
+#include "UI\Group.h"
 
 #endif
