@@ -3,7 +3,7 @@
 
 using namespace Goop;
 
-Window::Window(const wchar_t *title, Vector2D size) : m_title(0), m_menu(0)
+Window::Window(const wchar_t *title, Vector2D size) : m_menu(0)
 {
 	HINSTANCE hInst = GetModuleHandle( NULL );
 	WNDCLASSEX sWindowClass;
