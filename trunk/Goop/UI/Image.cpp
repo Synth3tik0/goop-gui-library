@@ -23,6 +23,7 @@ Image::~Image()
 void Image::SetBitmap(Bitmap *bitmap)
 {
 	m_bitmap = bitmap;
+	Redraw();
 }
 
 Bitmap *Image::GetBitmap()
