@@ -311,8 +311,8 @@ bool Base::OnBlur(Base *newFocus)
 
 LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lparam)
 {
-	Base *pElement = (Base *)GetWindowLongPtr(window, GWLP_USERDATA);
-	if(pElement != 0)
+	Base *element = (Base *)GetWindowLongPtr(window, GWLP_USERDATA);
+	if(element != 0)
 	{
 		switch(msg)
 		{
@@ -333,7 +333,7 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				POINTS pos = MAKEPOINTS(lparam);
 				MouseButton button = (msg == WM_LBUTTONDOWN) ? Left : ((msg == WM_RBUTTONDOWN) ? Right : Middle);
 
-				if(pElement->OnMouseDown(Vector2D(pos.x, pos.y), button))
+				if(element->OnMouseDown(Vector2D(pos.x, pos.y), button))
 					return 0;
 
 				break;
@@ -345,9 +345,9 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				POINTS pos = MAKEPOINTS(lparam);
 				MouseButton button = (msg == WM_LBUTTONUP) ? Left : ((msg == WM_RBUTTONUP) ? Right : Middle);
 
-				pElement->OnMouseClick(Vector2D(pos.x, pos.y), button);
+				element->OnMouseClick(Vector2D(pos.x, pos.y), button);
 
-				if(pElement->OnMouseUp(Vector2D(pos.x, pos.y), button))
+				if(element->OnMouseUp(Vector2D(pos.x, pos.y), button))
 					return 0;
 
 				break;
@@ -364,44 +364,44 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 		case WM_MOUSEMOVE:
 			{
 				POINTS pos = MAKEPOINTS(lparam);
-				if(pElement->OnMouseMove(Vector2D(pos.x, pos.y)))
+				if(element->OnMouseMove(Vector2D(pos.x, pos.y)))
 					return 0;
 
 				break;
 			}
 		case WM_SETTEXT:
 			{
-				if(pElement->OnTextChanged((const wchar_t *)lparam))
+				if(element->OnTextChanged((const wchar_t *)lparam))
 					return 0;
 
 				break;
 			}
 		case WM_PAINT:
 			{
-				if(pElement->OnPaint())
+				if(element->OnPaint())
 					return 0;
 
 				break;
 			}
 		case WM_CREATE:
 			{
-				if(pElement->OnCreate())
+				if(element->OnCreate())
 					return 0;
 
 				break;
 			}
 		case WM_CLOSE:
 			{
-				if(pElement->OnClose())
+				if(element->OnClose())
 					return 0;
 
 				break;
 			}
 		case WM_DESTROY:
 			{
-				pElement->m_handle = 0;
+				element->m_handle = 0;
 				
-				if(pElement->OnDestroy())
+				if(element->OnDestroy())
 					return 0;
 
 				break;
@@ -413,7 +413,7 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				if((pos->flags & SWP_NOSIZE) == 0)
 				{
 					Vector2D position = Vector2D(pos->cx, pos->cy);
-					if(!pElement->CanResize(position))
+					if(!element->CanResize(position))
 					{
 						pos->flags |= SWP_NOSIZE;
 					}
@@ -424,7 +424,7 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				if((pos->flags & SWP_NOMOVE) == 0)
 				{
 					Vector2D position = Vector2D(pos->x, pos->y);
-					if(!pElement->CanMove(position))
+					if(!element->CanMove(position))
 					{
 						pos->flags |= SWP_NOMOVE;
 					}
@@ -436,24 +436,24 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 		case WM_WINDOWPOSCHANGED:
 			{
 				WINDOWPOS *pos = (WINDOWPOS *)lparam;
-				pElement->m_position = Vector2D(pos->x, pos->y);
-				pElement->m_size = Vector2D(pos->cx, pos->cy);
+				element->m_position = Vector2D(pos->x, pos->y);
+				element->m_size = Vector2D(pos->cx, pos->cy);
 
 				if((pos->flags & SWP_NOMOVE) == 0)
 				{
-					pElement->OnMove(Vector2D(pos->x, pos->y));
+					element->OnMove(Vector2D(pos->x, pos->y));
 				}
 
 				if((pos->flags & SWP_NOMOVE) == 0)
 				{
-					pElement->OnResize(Vector2D(pos->cx, pos->cy));
+					element->OnResize(Vector2D(pos->cx, pos->cy));
 				}
 				break;
 			}
 		case WM_KILLFOCUS:
 			{
 				Base *newFocus = (Base *)GetWindowLongPtr((HWND)wparam, GWLP_USERDATA);
-				if(pElement->OnBlur(newFocus))
+				if(element->OnBlur(newFocus))
 					return 0;
 
 				break;
@@ -461,28 +461,28 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 		case WM_SETFOCUS:
 			{
 				Base *oldFocus = (Base *)GetWindowLongPtr((HWND)wparam, GWLP_USERDATA);
-				if(pElement->OnFocus(oldFocus))
+				if(element->OnFocus(oldFocus))
 					return 0;
 
 				break;
 			}
 		case WM_CHAR:
 			{
-				if(pElement->OnKeyInput((wchar_t)wparam))
+				if(element->OnKeyInput((wchar_t)wparam))
 					return 0;
 
 				break;
 			}
 		case WM_KEYDOWN:
 			{
-				if(pElement->OnKeyDown((wchar_t)wparam))
+				if(element->OnKeyDown((wchar_t)wparam))
 					return 0;
 
 				break;
 			}
 		case WM_KEYUP:
 			{
-				if(pElement->OnKeyUp((wchar_t)wparam))
+				if(element->OnKeyUp((wchar_t)wparam))
 					return 0;
 
 				break;
@@ -493,9 +493,9 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 			}
 		}
 
-		if(pElement->m_defaultProcess != 0)
+		if(element->m_defaultProcess != 0)
 		{
-			return CallWindowProc((WNDPROC)pElement->m_defaultProcess, window, msg, wparam, lparam);
+			return CallWindowProc((WNDPROC)element->m_defaultProcess, window, msg, wparam, lparam);
 		}
 	}
 
