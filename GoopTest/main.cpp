@@ -49,12 +49,16 @@ public:
 	// Radio button test
 	Radio button1 = Radio(TEXT("My button!"), &group);
 	button1.SetPosition(Vector2D(10, 30));
-	button1.SetSize(Vector2D(100, 25));
+	button1.SetSize(Vector2D(100, 20));
 
 	Radio button2 = Radio(TEXT("Also button!"), &group);
 	button2.SetPosition(Vector2D(10, 50));
-	button2.SetSize(Vector2D(100, 25));
+	button2.SetSize(Vector2D(100, 20));
 	button2.SetChecked(true);
+
+	Checkbox cbox = Checkbox(TEXT("Not a button :("), &group);
+	cbox.SetPosition(Vector2D(10, 70));
+	cbox.SetSize(Vector2D(100, 20));
 
 	// Menu test
 	Menu menu = Menu();

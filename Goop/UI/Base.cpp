@@ -1,5 +1,6 @@
 #include "Base.h"
 #include "Menu.h"
+#include "Checkbox.h"
 
 using namespace Goop;
 
@@ -315,13 +316,12 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 	{
 		switch(msg)
 		{
-		case WM_COMMAND:
+		case BM_SETCHECK:
 			{
-				printf("Hiword: %d, Loword: %d\n", HIWORD(wparam), LOWORD(wparam));
-				if(HIWORD(wparam) == EN_CHANGE)
-				{
-					int derp = 0;
-				}
+				if(wparam == BST_CHECKED)
+					((Checkbox *)element)->OnChecked();
+				else
+					((Checkbox *)element)->OnUnchecked();
 
 				break;
 			}

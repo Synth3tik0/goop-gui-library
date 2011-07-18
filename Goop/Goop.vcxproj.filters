@@ -59,6 +59,9 @@
     <ClInclude Include="UI\Group.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Checkbox.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Goop.cpp">
@@ -104,6 +107,9 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\Group.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Checkbox.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>

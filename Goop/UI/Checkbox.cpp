@@ -1,17 +1,17 @@
-#include "Radio.h"
+#include "Checkbox.h"
 #include "../MessageProxy.h"
 
-using Goop::Radio;
+using Goop::Checkbox;
 
-static unsigned int g_radioId = 0;
+static unsigned int g_checkId = 100000;
 
-Radio::Radio(const wchar_t *text, Base *parent)
+Checkbox::Checkbox(const wchar_t *text, Base *parent)
 {
-	m_id = ++g_radioId;
+	m_id = ++g_checkId;
 	m_proxy = new MessageProxy(this);
 
 	HINSTANCE hInst = GetModuleHandle(0);
-	m_handle = (HWND)CreateWindowExW(0, L"BUTTON", L"", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, m_proxy->m_handle, (HMENU)m_id, hInst, 0);
+	m_handle = (HWND)CreateWindowExW(0, L"BUTTON", L"", WS_CHILD | WS_VISIBLE | BS_AUTOCHECKBOX, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, m_proxy->m_handle, (HMENU)m_id, hInst, 0);
 
 	InitializeBase();
 	m_defaultProcess = SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)Base::Process);
@@ -20,27 +20,27 @@ Radio::Radio(const wchar_t *text, Base *parent)
 	SetText(text);
 }
 
-Radio::~Radio()
+Checkbox::~Checkbox()
 {
 
 }
 
-bool Radio::GetChecked()
+bool Checkbox::GetChecked()
 {
 	return (bool)(::IsDlgButtonChecked(m_parent->GetHandle(), m_id) == BST_CHECKED);
 }
 
-void Radio::SetChecked(bool checked)
+void Checkbox::SetChecked(bool checked)
 {
 	::CheckDlgButton(m_parent->GetHandle(), m_id, checked ? BST_CHECKED : BST_UNCHECKED);
 }
 
-bool Radio::OnChecked()
+bool Checkbox::OnChecked()
 {
 	return false;
 }
 
-bool Radio::OnUnchecked()
+bool Checkbox::OnUnchecked()
 {
 	return false;
 }

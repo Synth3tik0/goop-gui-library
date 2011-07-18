@@ -18,5 +18,6 @@
 #include "UI\Radio.h"
 #include "UI\Image.h"
 #include "UI\Group.h"
+#include "UI\Checkbox.h"
 
 #endif
