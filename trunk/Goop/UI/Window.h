@@ -20,13 +20,10 @@ namespace Goop
 		GOOP_API void Minimize();
 		GOOP_API void Restore();
 
-		GOOP_API virtual bool OnTextChanged(const wchar_t *text);
-
 		GOOP_API virtual Menu *GetMenu();
 		GOOP_API virtual void SetMenu(Menu *);
 	private:
 		Menu *m_menu;
-		wchar_t *m_title;
 	};
 }
 

@@ -38,12 +38,12 @@ Window::~Window()
 
 void Window::SetTitle(const wchar_t *title)
 {
-	::SetWindowText(m_handle, title);
+	SetText(title);
 }
 
 const wchar_t *Window::GetTitle()
 {
-	return m_title;
+	return GetText();
 }
 
 void Window::Maximize()
@@ -59,23 +59,6 @@ void Window::Minimize()
 void Window::Restore()
 {
 	::ShowWindow(m_handle, SW_RESTORE);
-}
-
-bool Window::OnTextChanged(const wchar_t *title)
-{
-	if(m_title != 0)
-		free(m_title);
-
-	if(title != 0)
-	{
-		m_title = _wcsdup(title);
-	}
-	else
-	{
-		m_title = 0;
-	}
-
-	return false;
 }
 
 Menu *Window::GetMenu()
