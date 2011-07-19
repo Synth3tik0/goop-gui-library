@@ -14,6 +14,13 @@ namespace Goop
 		Middle,
 	} MouseButton;
 
+	typedef enum
+	{
+		Minimize,
+		Maximize,
+		Close
+	} WindowButton;
+
 	class GOOP_API Vector2D
 	{
 	public:

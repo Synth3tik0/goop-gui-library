@@ -8,7 +8,7 @@ Window::Window(const wchar_t *title, Vector2D size) : m_menu(0)
 	HINSTANCE instanceHandle = GetModuleHandle( NULL );
 	WNDCLASSEX windowClass;
 	windowClass.cbSize = sizeof(WNDCLASSEX);
-	windowClass.style = CS_HREDRAW | CS_VREDRAW;
+	windowClass.style = 0;
 	windowClass.lpfnWndProc = (WNDPROC)Base::Process;
 	windowClass.cbClsExtra = 0;
 	windowClass.cbWndExtra = 0;
@@ -70,4 +70,20 @@ void Window::SetMenu(Menu *menu)
 {
 	m_menu = menu;
 	::SetMenu(m_handle, m_menu->m_handle);
+}
+
+void Window::ShowButton(WindowButton button, bool show)
+{
+	DWORD style = 0;
+	switch(button)
+	{
+		case ::Minimize: style = WS_MINIMIZEBOX; break;
+		case ::Maximize: style = WS_MAXIMIZEBOX; break;
+		case ::Close: style = WS_SYSMENU; break;
+	}
+
+	if(show)
+		AddStyle(style);
+	else
+		RemoveStyle(style);
 }

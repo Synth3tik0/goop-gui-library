@@ -1,6 +1,6 @@
 #include "Label.h"
 
-using Goop::Label;
+using namespace Goop;
 
 Label::Label(const wchar_t *text, Base *parent)
 {

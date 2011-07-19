@@ -22,6 +22,8 @@ namespace Goop
 
 		GOOP_API virtual Menu *GetMenu();
 		GOOP_API virtual void SetMenu(Menu *);
+
+		GOOP_API virtual void ShowButton(WindowButton, bool show);
 	private:
 		Menu *m_menu;
 	};
