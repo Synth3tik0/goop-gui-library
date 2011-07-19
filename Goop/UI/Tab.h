@@ -17,6 +17,7 @@ namespace Goop
 
 		GOOP_API virtual void OnSelected();
 		GOOP_API virtual void OnDeselected();
+		GOOP_API virtual bool OnPerformLayout();
 	private:
 		int m_id;
 	};

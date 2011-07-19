@@ -43,3 +43,15 @@ void Tab::OnDeselected()
 {
 	
 }
+
+bool Tab::OnPerformLayout()
+{
+	if(m_parent != 0)
+	{
+		Vector2D size = m_parent->GetSize();
+		SetPosition(Vector2D(1, 22));
+		SetSize(Vector2D(size.m_x - 4, size.m_y - 24));
+	}
+
+	return false;
+}
