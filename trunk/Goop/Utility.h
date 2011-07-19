@@ -16,9 +16,9 @@ namespace Goop
 
 	typedef enum
 	{
-		Minimize,
-		Maximize,
-		Close
+		Minimize = 1,
+		Maximize = 2,
+		Close = 4
 	} WindowButton;
 
 	class GOOP_API Vector2D

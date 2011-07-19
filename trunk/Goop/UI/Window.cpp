@@ -74,16 +74,16 @@ void Window::SetMenu(Menu *menu)
 
 void Window::ShowButton(WindowButton button, bool show)
 {
-	DWORD style = 0;
-	switch(button)
-	{
-		case ::Minimize: style = WS_MINIMIZEBOX; break;
-		case ::Maximize: style = WS_MAXIMIZEBOX; break;
-		case ::Close: style = WS_SYSMENU; break;
-	}
-
 	if(show)
-		AddStyle(style);
+	{
+		if((button & ::Minimize) > 0) RemoveStyle(WS_MINIMIZEBOX);
+		if((button & ::Maximize) > 0) RemoveStyle(WS_MAXIMIZEBOX);
+		if((button & ::Close) > 0)    RemoveStyle(WS_SYSMENU);
+	}	
 	else
-		RemoveStyle(style);
+	{	
+		if((button & ::Minimize) > 0) RemoveStyle(WS_MINIMIZEBOX);
+		if((button & ::Maximize) > 0) RemoveStyle(WS_MAXIMIZEBOX);
+		if((button & ::Close) > 0)	  RemoveStyle(WS_SYSMENU);
+	}
 }

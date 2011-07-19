@@ -34,3 +34,15 @@ bool Textbox::GetMultiline()
 {
 	return (GetStyle() & ES_MULTILINE) > 0;
 }
+
+void Textbox::AppendText(const wchar_t *text)
+{
+	HWND currentFocus = ::GetFocus();
+
+	SendMessage(m_handle, WM_SETFOCUS, (WPARAM)m_handle, 0);
+	SendMessage(m_handle, EM_SETSEL, (WPARAM)-1, (LPARAM)-1);
+	SendMessage(m_handle, EM_REPLACESEL, 0, (LPARAM)text);
+
+	if(currentFocus != 0)
+		SetFocus(currentFocus);
+}

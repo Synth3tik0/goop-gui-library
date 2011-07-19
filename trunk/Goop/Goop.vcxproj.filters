@@ -62,9 +62,6 @@
     <ClInclude Include="UI\Checkbox.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\GLControl.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Tab.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
@@ -116,9 +113,6 @@
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\Checkbox.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\GLControl.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="UI\Tab.cpp">
