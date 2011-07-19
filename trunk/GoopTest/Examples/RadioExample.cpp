@@ -72,7 +72,7 @@ public:
 
 void RadioExample(TabContainer *tabContainer)
 {
-	g_outputBox->AppendText(TEXT("Created Label Example tab\r\n"));
+	g_outputBox->AppendText(TEXT("Created Radio Example tab\r\n"));
 
 	Tab *tab = tabContainer->AddTab(TEXT("Radio"));
 
