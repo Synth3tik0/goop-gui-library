@@ -93,7 +93,6 @@
   <ItemGroup>
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="Goop.cpp" />
     <ClCompile Include="MessageProxy.cpp" />
     <ClCompile Include="UI\Base.cpp" />
     <ClCompile Include="UI\Button.cpp" />
