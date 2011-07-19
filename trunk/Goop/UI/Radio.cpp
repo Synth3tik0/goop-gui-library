@@ -10,8 +10,8 @@ Radio::Radio(const wchar_t *text, Base *parent)
 	m_id = ++g_radioId;
 	m_proxy = new MessageProxy(this);
 
-	HINSTANCE hInst = GetModuleHandle(0);
-	m_handle = (HWND)CreateWindowExW(0, L"BUTTON", L"", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, m_proxy->m_handle, (HMENU)m_id, hInst, 0);
+	HINSTANCE instanceHandle = GetModuleHandle(0);
+	m_handle = (HWND)CreateWindowExW(0, L"BUTTON", L"", WS_CHILD | WS_VISIBLE | BS_AUTORADIOBUTTON, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, m_proxy->m_handle, (HMENU)m_id, instanceHandle, 0);
 
 	InitializeBase();
 	m_defaultProcess = SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)Base::Process);

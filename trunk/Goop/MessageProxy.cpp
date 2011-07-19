@@ -5,8 +5,8 @@ using namespace Goop;
 
 MessageProxy::MessageProxy(Base *parent)
 {
-	HINSTANCE hInst = GetModuleHandle( NULL );
-	m_handle = CreateWindowExW(0, L"STATIC", L"", 0, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, hInst, 0);
+	HINSTANCE instanceHandle = GetModuleHandle( NULL );
+	m_handle = CreateWindowExW(0, L"STATIC", L"", 0, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
 	SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)MessageProxy::Process);
 	SetWindowLongPtr(m_handle, GWLP_USERDATA, (LONG_PTR)this);
 

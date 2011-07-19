@@ -5,8 +5,8 @@ using namespace Goop;
 
 Image::Image(Bitmap *bitmap, Base *parent) : m_bitmap(0)
 {
-	HINSTANCE hInst = GetModuleHandle(0);
-	m_handle = (HWND)CreateWindowExW(0, L"STATIC", L"", WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, hInst, 0);
+	HINSTANCE instanceHandle = GetModuleHandle(0);
+	m_handle = (HWND)CreateWindowExW(0, L"STATIC", L"", WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
 
 	InitializeBase();
 	m_defaultProcess = SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)Base::Process);
