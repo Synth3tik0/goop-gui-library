@@ -22,6 +22,7 @@ namespace Goop
 		GOOP_API virtual void RemoveChild(Base *child);
 		GOOP_API virtual Base *GetParent();
 		GOOP_API virtual HWND GetHandle();
+		GOOP_API virtual bool IsValid();
 
 		GOOP_API virtual void SetFont(Font *font);
 		GOOP_API virtual Font *GetFont();
@@ -33,6 +34,8 @@ namespace Goop
 		GOOP_API virtual const wchar_t *GetText();
 		GOOP_API virtual void SetBackgroundColor(int r, int g, int b);
 
+		GOOP_API virtual void SendKeyInput(wchar_t key);
+
 		GOOP_API virtual void Update();
 		GOOP_API virtual void Destroy();
 		GOOP_API virtual void Redraw();
@@ -41,8 +44,6 @@ namespace Goop
 		GOOP_API virtual void SetStyle(DWORD style);
 		GOOP_API virtual void AddStyle(DWORD style);
 		GOOP_API virtual void RemoveStyle(DWORD style);
-
-		GOOP_API virtual bool IsValid();
 
 		GOOP_API virtual bool CanMove(Vector2D &position);
 		GOOP_API virtual bool CanResize(Vector2D &position);
