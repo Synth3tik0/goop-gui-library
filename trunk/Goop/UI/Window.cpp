@@ -12,7 +12,7 @@ Window::Window(const wchar_t *title, Vector2D size) : m_menu(0)
 	windowClass.lpfnWndProc = (WNDPROC)Base::Process;
 	windowClass.cbClsExtra = 0;
 	windowClass.cbWndExtra = 0;
-	windowClass.instanceHandleance = instanceHandle;
+	windowClass.hInstance = instanceHandle;
 	windowClass.hIcon = NULL;
 	windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	windowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
