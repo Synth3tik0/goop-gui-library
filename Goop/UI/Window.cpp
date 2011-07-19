@@ -5,25 +5,25 @@ using namespace Goop;
 
 Window::Window(const wchar_t *title, Vector2D size) : m_menu(0)
 {
-	HINSTANCE hInst = GetModuleHandle( NULL );
-	WNDCLASSEX sWindowClass;
-	sWindowClass.cbSize = sizeof(WNDCLASSEX);
-	sWindowClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-	sWindowClass.lpfnWndProc = (WNDPROC)Base::Process;
-	sWindowClass.cbClsExtra = 0;
-	sWindowClass.cbWndExtra = 0;
-	sWindowClass.hInstance = hInst;
-	sWindowClass.hIcon = NULL;
-	sWindowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	sWindowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
-	sWindowClass.lpszMenuName = NULL;
-	sWindowClass.lpszClassName = L"GoopWindow";
-	sWindowClass.hIconSm = NULL;
-	RegisterClassEx( &sWindowClass );
+	HINSTANCE instanceHandle = GetModuleHandle( NULL );
+	WNDCLASSEX windowClass;
+	windowClass.cbSize = sizeof(WNDCLASSEX);
+	windowClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+	windowClass.lpfnWndProc = (WNDPROC)Base::Process;
+	windowClass.cbClsExtra = 0;
+	windowClass.cbWndExtra = 0;
+	windowClass.instanceHandleance = instanceHandle;
+	windowClass.hIcon = NULL;
+	windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	windowClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
+	windowClass.lpszMenuName = NULL;
+	windowClass.lpszClassName = L"GoopWindow";
+	windowClass.hIconSm = NULL;
+	RegisterClassEx( &windowClass );
 
 	DWORD ExStyle = NULL;
 
-	m_handle = (HWND)CreateWindowEx(ExStyle, L"GoopWindow", L"", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, size.m_x, size.m_y, NULL, NULL, hInst, NULL);
+	m_handle = (HWND)CreateWindowEx(ExStyle, L"GoopWindow", L"", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, size.m_x, size.m_y, NULL, NULL, instanceHandle, NULL);
 	m_size = size;
 
 	InitializeBase();
