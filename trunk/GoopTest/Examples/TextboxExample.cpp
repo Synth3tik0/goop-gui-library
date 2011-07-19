@@ -21,6 +21,8 @@ public:
 					g_textBoxes[i]->SetText(GetText());
 				}
 			}
+
+			return true;
 		}
 
 		return false;
