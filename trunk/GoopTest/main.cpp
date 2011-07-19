@@ -25,6 +25,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 	ButtonExample(&container);
 	LabelExample(&container);
 	RadioExample(&container);
+	ImageExample(&container);
 
 	while(window.IsValid())
 	{

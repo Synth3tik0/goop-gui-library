@@ -26,6 +26,9 @@
     <ClCompile Include="Examples\RadioExample.cpp">
       <Filter>Source Files\Examples</Filter>
     </ClCompile>
+    <ClCompile Include="Examples\ImageExample.cpp">
+      <Filter>Source Files\Examples</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples\examples.h">
