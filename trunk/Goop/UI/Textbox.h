@@ -17,6 +17,7 @@ namespace Goop
 
 		GOOP_API virtual void AppendText(const wchar_t *text);
 	private:
+		void SwitchMode(const wchar_t *text, Base *parent, DWORD style);
 		MessageProxy *m_proxy;
 	};
 }
