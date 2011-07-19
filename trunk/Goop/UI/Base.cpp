@@ -447,7 +447,7 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 					element->OnMove(Vector2D(pos->x, pos->y));
 				}
 
-				if((pos->flags & SWP_NOMOVE) == 0)
+				if((pos->flags & SWP_NOSIZE) == 0)
 				{
 					element->OnResize(Vector2D(pos->cx, pos->cy));
 				}
