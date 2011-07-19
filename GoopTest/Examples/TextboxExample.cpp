@@ -35,10 +35,15 @@ void TextboxExample(TabContainer *tabContainer)
 
 	Tab *tab = tabContainer->AddTab(TEXT("Textbox"));
 
+	Label *label = new Label(TEXT("Enter some text in any of the fields and press enter\nto instantly copy it to all the others!"), tab);
+	label->SetPosition(Vector2D(10, 10));
+	label->SetSize(Vector2D(400, 45));
+	label->SetBackgroundColor(255,255,255);
+
 	for(int i = 0; i < 4; i++)
 	{
 		ExampleTextbox *box = new ExampleTextbox(TEXT(""), tab);
-		box->SetPosition(Vector2D(10, 10 + i * 25));
+		box->SetPosition(Vector2D(10, 60 + i * 25));
 		box->SetSize(Vector2D(200, 20));
 
 		g_textBoxes[i] = box;
