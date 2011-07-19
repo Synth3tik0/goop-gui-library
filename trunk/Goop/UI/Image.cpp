@@ -44,6 +44,7 @@ void Image::DrawBitmap()
 
 		SelectObject(memory, m_bitmap->GetHandle() );
 
+		SetStretchBltMode(device, HALFTONE);
 		StretchBlt(device, 0, 0, imageSize.m_x, imageSize.m_y, memory, 0, 0, bitmapSize.m_x, bitmapSize.m_y, SRCCOPY );
 
 		DeleteDC(memory);
