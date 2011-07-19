@@ -14,6 +14,8 @@ namespace Goop
 
 		GOOP_API virtual void SetMultiline(bool multiline);
 		GOOP_API virtual bool GetMultiline();
+
+		GOOP_API virtual void AppendText(const wchar_t *text);
 	private:
 		MessageProxy *m_proxy;
 	};
