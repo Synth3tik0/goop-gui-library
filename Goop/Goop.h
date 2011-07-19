@@ -19,6 +19,5 @@
 #include "UI\Image.h"
 #include "UI\Group.h"
 #include "UI\Checkbox.h"
-#include "UI\GLControl.h"
 
 #endif

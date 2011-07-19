@@ -87,11 +87,6 @@ public:
 	img.SetPosition(Vector2D(300, 200));
 	img.SetSize(Vector2D(500, 500));
 
-	GLControl ogl = GLControl(&window);
-	ogl.SetPosition(Vector2D(10, 400));
-	ogl.SetSize(Vector2D(200, 100));
-	ogl.CreateContext();
-	
 	while(window.IsValid())
 	{
 		window.Update();
