@@ -1,10 +1,13 @@
 #include "Base.h"
 #include "Menu.h"
 #include "Checkbox.h"
+#include "TabContainer.h"
+#include "Tab.h"
+#include <CommCtrl.h>
 
 using namespace Goop;
 
-Base::Base() : m_font(0), m_text(0), m_position(0, 0), m_size(0, 0), m_handle(0), m_parent(0), m_defaultProcess(0)
+Base::Base() : m_background(0), m_font(0), m_text(0), m_position(0, 0), m_size(0, 0), m_handle(0), m_parent(0), m_defaultProcess(0)
 {
 	
 }
@@ -156,6 +159,14 @@ const wchar_t *Base::GetText()
 	::GetWindowTextW(m_handle, m_text, length + 1);
 	
 	return m_text;
+}
+
+void Base::SetBackgroundColor(int r, int g, int b)
+{
+	if(m_background != 0)
+		DeleteObject(m_background);
+
+	m_background = CreateSolidBrush(RGB(r, g, b));
 }
 
 HWND Base::GetHandle()
@@ -409,6 +420,18 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 
 				break;
 			}
+		case WM_CTLCOLORSTATIC:
+		case WM_CTLCOLORBTN:
+		case WM_CTLCOLOREDIT:
+		case WM_CTLCOLORLISTBOX:
+		case WM_CTLCOLORSCROLLBAR:
+			{
+				Base *control = (Base *)GetWindowLongPtr((HWND)lparam, GWLP_USERDATA);
+				if(control != 0 && control->m_background != 0)
+					return (INT_PTR)control->m_background;
+
+				break;
+			}
 		case WM_WINDOWPOSCHANGING:
 			{
 				WINDOWPOS* pos = (WINDOWPOS*)lparam;
@@ -489,6 +512,34 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				if(element->OnKeyUp((wchar_t)wparam))
 					return 0;
 
+				break;
+			}
+		case WM_NOTIFY:
+			{
+				NMHDR info = *(NMHDR *)lparam;
+				switch(info.code)
+				{
+				case TCN_SELCHANGING:
+					{
+						TabContainer *container = (TabContainer *)GetWindowLongPtr((HWND)info.hwndFrom, GWLP_USERDATA);
+						
+						Tab *current = container->GetSelectedTab();
+						current->Hide();
+						current->OnDeselected();
+
+						break;
+					}
+				case TCN_SELCHANGE:
+					{
+						TabContainer *container = (TabContainer *)GetWindowLongPtr((HWND)info.hwndFrom, GWLP_USERDATA);
+						
+						Tab *current = container->GetSelectedTab();
+						current->Show();
+						current->OnSelected();
+
+						break;
+					}
+				}
 				break;
 			}
 		default:

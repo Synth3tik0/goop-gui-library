@@ -25,6 +25,7 @@ public:
 	// Window test
 	Window window = Window(L"My title");
 	window.SetPosition(Vector2D(10, 20));
+	window.ShowButton(::Minimize, false);
 
 	// Label test
 	Label label = Label(TEXT("Sup bitches"));
@@ -86,6 +87,16 @@ public:
 	Image img = Image(&bmp, &window);
 	img.SetPosition(Vector2D(300, 200));
 	img.SetSize(Vector2D(500, 500));
+	
+	// Tab/TabContainer test
+	TabContainer tab = TabContainer(&window);
+	tab.SetPosition(Vector2D(10, 300));
+	tab.SetSize(Vector2D(200, 200));
+		Tab *tab1 = tab.AddTab(TEXT("Tab 1"));
+			Button btn = Button(TEXT("Button in tab!"), tab1);
+			btn.SetPosition(Vector2D(10, 10));
+			btn.SetSize(Vector2D(150, 25));
+		Tab *tab2 = tab.AddTab(TEXT("Tab 2"));
 
 	while(window.IsValid())
 	{
