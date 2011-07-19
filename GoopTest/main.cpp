@@ -19,7 +19,7 @@ public:
 #ifdef _DEBUG
 	int main()
 #else
-	int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine, int nCmdShow)
+	int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nCmdShow)
 #endif
 {
 	// Window test
