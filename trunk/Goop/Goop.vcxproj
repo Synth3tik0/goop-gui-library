@@ -93,6 +93,8 @@
     <ClInclude Include="UI\Label.h" />
     <ClInclude Include="UI\Menu.h" />
     <ClInclude Include="UI\Radio.h" />
+    <ClInclude Include="UI\Tab.h" />
+    <ClInclude Include="UI\TabContainer.h" />
     <ClInclude Include="UI\Textbox.h" />
     <ClInclude Include="UI\Window.h" />
     <ClInclude Include="Utility.h" />
@@ -111,6 +113,8 @@
     <ClCompile Include="UI\Menu.cpp" />
     <ClCompile Include="UI\MenuItem.cpp" />
     <ClCompile Include="UI\Radio.cpp" />
+    <ClCompile Include="UI\Tab.cpp" />
+    <ClCompile Include="UI\TabContainer.cpp" />
     <ClCompile Include="UI\Textbox.cpp" />
     <ClCompile Include="UI\Window.cpp" />
     <ClCompile Include="Utility.cpp" />

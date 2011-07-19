@@ -31,6 +31,7 @@ namespace Goop
 		GOOP_API virtual Vector2D GetSize();	
 		GOOP_API virtual void SetText(const wchar_t *text);
 		GOOP_API virtual const wchar_t *GetText();
+		GOOP_API virtual void SetBackgroundColor(int r, int g, int b);
 
 		GOOP_API virtual void Update();
 		GOOP_API virtual void Destroy();
@@ -75,6 +76,7 @@ namespace Goop
 		static LRESULT Process(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);
 
 		wchar_t *m_text;
+		HBRUSH m_background;
 		LONG_PTR m_defaultProcess;
 		std::vector<Base *> m_children;
 		Base *m_parent;
