@@ -169,6 +169,11 @@ void Base::SetBackgroundColor(int r, int g, int b)
 	m_background = CreateSolidBrush(RGB(r, g, b));
 }
 
+void Base::SendKeyInput(wchar_t key)
+{
+	::SendMessageW(m_handle, WM_CHAR, (WPARAM)key, 0);
+}
+
 HWND Base::GetHandle()
 {
 	return m_handle;
