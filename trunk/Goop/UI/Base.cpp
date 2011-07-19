@@ -312,6 +312,7 @@ bool Base::OnBlur(Base *newFocus)
 LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lparam)
 {
 	Base *element = (Base *)GetWindowLongPtr(window, GWLP_USERDATA);
+
 	if(element != 0)
 	{
 		switch(msg)
@@ -378,7 +379,10 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 		case WM_PAINT:
 			{
 				if(element->OnPaint())
+				{
+					ValidateRect(element->m_handle, 0);
 					return 0;
+				}
 
 				break;
 			}
