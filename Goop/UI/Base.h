@@ -67,6 +67,7 @@ namespace Goop
 		GOOP_API virtual bool OnPaint();
 		GOOP_API virtual bool OnFocus(Base *oldFocus);
 		GOOP_API virtual bool OnBlur(Base *newFocus);
+		GOOP_API virtual bool OnPerformLayout();
 
 	protected:
 		Base();
