@@ -64,9 +64,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Goop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UI\Base.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
