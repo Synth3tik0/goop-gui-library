@@ -320,6 +320,11 @@ bool Base::OnBlur(Base *newFocus)
 	return false;
 }
 
+bool Base::OnPerformLayout()
+{
+	return false;
+}
+
 LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lparam)
 {
 	Base *element = (Base *)GetWindowLongPtr(window, GWLP_USERDATA);
@@ -473,6 +478,8 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				if((pos->flags & SWP_NOSIZE) == 0)
 				{
 					element->OnResize(Vector2D(pos->cx, pos->cy));
+					for(unsigned int i = 0; i < element->m_children.size(); i++)
+						element->m_children[i]->OnPerformLayout();
 				}
 
 				break;

@@ -4,11 +4,7 @@ using namespace Goop;
 
 Textbox *g_outputBox = 0;
 
-#ifdef _DEBUG
-	int main()
-#else
-	int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nCmdShow)
-#endif
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nCmdShow)
 {
 	Window window = Window(TEXT("Goop Example Application"), Vector2D(600, 550));
 	window.ShowButton((WindowButton)(Minimize | Maximize), false);
@@ -28,6 +24,7 @@ Textbox *g_outputBox = 0;
 	// Create Examples
 	ButtonExample(&container);
 	LabelExample(&container);
+	RadioExample(&container);
 
 	while(window.IsValid())
 	{

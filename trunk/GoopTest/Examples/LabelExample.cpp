@@ -26,7 +26,5 @@ void LabelExample(TabContainer *tabContainer)
 		right->SetBackgroundColor(255, 255, 255);
 
 		offset += i + 10;
-
-	
 	}	
 }
