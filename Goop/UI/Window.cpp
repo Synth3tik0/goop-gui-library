@@ -8,7 +8,7 @@ Window::Window(const wchar_t *title, Vector2D size) : m_menu(0)
 	HINSTANCE instanceHandle = GetModuleHandle( NULL );
 	WNDCLASSEX windowClass;
 	windowClass.cbSize = sizeof(WNDCLASSEX);
-	windowClass.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+	windowClass.style = CS_HREDRAW | CS_VREDRAW;
 	windowClass.lpfnWndProc = (WNDPROC)Base::Process;
 	windowClass.cbClsExtra = 0;
 	windowClass.cbWndExtra = 0;
