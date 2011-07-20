@@ -23,7 +23,6 @@ void Base::InitializeBase()
 	SetWindowLongPtr(m_handle, GWLP_USERDATA, (LONG_PTR)this);
 	SetFont(Font::GetDefault());
 	OnCreate();
-	::ShowWindow(m_handle, SW_SHOWNORMAL);
 }
 
 void Base::Show()
@@ -379,7 +378,7 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 				MenuItem *item = menu->GetItemByIndex(wparam);
 				if(item->OnMouseClick(Left))
 					return 0;
-
+				
 				break;
 			}
 		case WM_MOUSEMOVE:
