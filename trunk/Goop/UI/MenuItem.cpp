@@ -3,7 +3,7 @@
 
 using namespace Goop;
 
-MenuItem::MenuItem(const wchar_t *text) : m_parent(0), m_position(0)
+void MenuItem::InitializeInfo()
 {
 	memset(&m_info, 0, sizeof(MENUITEMINFOW));
 	m_info.cbSize = sizeof(MENUITEMINFOW);
@@ -16,8 +16,13 @@ MenuItem::MenuItem(const wchar_t *text) : m_parent(0), m_position(0)
 	m_info.hbmpChecked = 0;
 	m_info.hbmpUnchecked = 0;
 	m_info.hbmpItem = 0;
-	m_info.fType = MFT_STRING;
+	m_info.fType = 0;
 	m_info.fState = MFS_ENABLED | MFS_UNCHECKED;
+}
+
+MenuItem::MenuItem(const wchar_t *text) : m_parent(0), m_position(0)
+{
+	InitializeInfo();
 
 	if(text != 0)
 	{
@@ -28,19 +33,7 @@ MenuItem::MenuItem(const wchar_t *text) : m_parent(0), m_position(0)
 
 MenuItem::MenuItem(Bitmap *bitmap) : m_parent(0)
 {
-	memset(&m_info, 0, sizeof(MENUITEMINFOW));
-	m_info.cbSize = sizeof(MENUITEMINFOW);
-	m_info.fMask = MIIM_SUBMENU | MIIM_DATA | MIIM_STRING | MIIM_FTYPE | MIIM_STRING | MIIM_BITMAP | MIIM_CHECKMARKS | MIIM_ID | MIIM_STATE;
-	m_info.dwItemData = (ULONG_PTR)this;
-	m_info.dwTypeData = 0;
-	m_info.cch = 0;
-	m_info.wID = (ULONG_PTR)this;
-	m_info.hSubMenu = 0;
-	m_info.hbmpChecked = 0;
-	m_info.hbmpUnchecked = 0;
-	m_info.hbmpItem = 0;
-	m_info.fType = MFT_STRING;
-	m_info.fState = MFS_ENABLED | MFS_UNCHECKED;
+	InitializeInfo();
 
 	if(bitmap != 0)
 	{

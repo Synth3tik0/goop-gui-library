@@ -53,6 +53,7 @@ namespace Goop
 
 	private:
 		int m_position;
+		void InitializeInfo();
 		void UpdateInfo();
 	};
 }
