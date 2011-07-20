@@ -23,6 +23,7 @@ public:
 			}
 			g_outputBox->AppendText(TEXT("Set all textboxes to "));
 			g_outputBox->AppendText(GetText());
+			g_outputBox->AppendText(TEXT("\r\n"));
 
 			return true;
 		}
