@@ -53,6 +53,16 @@ bool Textbox::GetMultiline()
 	return (GetStyle() & ES_MULTILINE) > 0;
 }
 
+void Textbox::SetPasswordCharacter(wchar_t character)
+{
+	::SendMessageW(m_handle, EM_SETPASSWORDCHAR, (WPARAM)character, 0);
+}
+
+wchar_t Textbox::GetPasswordCharacter()
+{
+	return (wchar_t)::SendMessageW(m_handle, EM_GETPASSWORDCHAR, 0, 0);
+}
+
 void Textbox::AppendText(const wchar_t *text)
 {
 	HWND currentFocus = ::GetFocus();
