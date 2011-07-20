@@ -21,6 +21,8 @@ public:
 					g_textBoxes[i]->SetText(GetText());
 				}
 			}
+			g_outputBox->AppendText(TEXT("Set all textboxes to "));
+			g_outputBox->AppendText(GetText());
 
 			return true;
 		}
