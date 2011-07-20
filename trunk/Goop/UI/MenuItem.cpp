@@ -3,69 +3,132 @@
 
 using namespace Goop;
 
-MenuItem::MenuItem(Menu *parent, const wchar_t *text) : m_parent(0), m_text(0), m_bitmap(0)
+MenuItem::MenuItem(const wchar_t *text) : m_parent(0), m_position(0)
 {
-	if(parent != 0)
+	memset(&m_info, 0, sizeof(MENUITEMINFOW));
+	m_info.cbSize = sizeof(MENUITEMINFOW);
+	m_info.fMask = MIIM_SUBMENU | MIIM_DATA | MIIM_STRING | MIIM_FTYPE | MIIM_STRING | MIIM_BITMAP | MIIM_CHECKMARKS | MIIM_ID | MIIM_STATE;
+	m_info.dwItemData = (ULONG_PTR)this;
+	m_info.dwTypeData = 0;
+	m_info.cch = 0;
+	m_info.wID = (ULONG_PTR)this;
+	m_info.hSubMenu = 0;
+	m_info.hbmpChecked = 0;
+	m_info.hbmpUnchecked = 0;
+	m_info.hbmpItem = 0;
+	m_info.fType = MFT_STRING;
+	m_info.fState = MFS_ENABLED | MFS_UNCHECKED;
+
+	if(text != 0)
 	{
-		m_parent = parent;
-		m_text = _wcsdup(text);
-
-		MENUITEMINFOW info;
-		info.cbSize = sizeof(MENUITEMINFOW);
-		info.fMask = MIIM_ID | MIIM_DATA | MIIM_STRING | MIIM_FTYPE | MIIM_STATE;
-		info.wID = (UINT)this;
-		info.dwItemData = (DWORD)this;
-		info.dwTypeData = (wchar_t *)m_text;
-		info.cch = wcslen(m_text) + 1;
-		info.fState = MFS_UNCHECKED;
-		info.fType = MFT_STRING;
-
-		InsertMenuItemW(parent->m_handle, (UINT)this, false, &info);
+		m_info.dwTypeData = _wcsdup(text);
+		m_info.cch = wcslen(text) + 1;
 	}
 }
 
-MenuItem::MenuItem()
+MenuItem::MenuItem(Bitmap *bitmap) : m_parent(0)
+{
+	memset(&m_info, 0, sizeof(MENUITEMINFOW));
+	m_info.cbSize = sizeof(MENUITEMINFOW);
+	m_info.fMask = MIIM_SUBMENU | MIIM_DATA | MIIM_STRING | MIIM_FTYPE | MIIM_STRING | MIIM_BITMAP | MIIM_CHECKMARKS | MIIM_ID | MIIM_STATE;
+	m_info.dwItemData = (ULONG_PTR)this;
+	m_info.dwTypeData = 0;
+	m_info.cch = 0;
+	m_info.wID = (ULONG_PTR)this;
+	m_info.hSubMenu = 0;
+	m_info.hbmpChecked = 0;
+	m_info.hbmpUnchecked = 0;
+	m_info.hbmpItem = 0;
+	m_info.fType = MFT_STRING;
+	m_info.fState = MFS_ENABLED | MFS_UNCHECKED;
+
+	if(bitmap != 0)
+	{
+		m_info.hbmpItem = (HBITMAP)bitmap->GetHandle();
+	}
+}
+
+MenuItem::~MenuItem()
 {
 
+}
+
+void MenuItem::SetMenu(Menu *menu)
+{
+	/********************************************
+	* Due to undefined behaviour in the WinAPI, *
+	* which DELETES any pre-existing menus,     *
+	* should the menu be changed, I have to do  *
+	* this in a really awkward and retarded way *
+	********************************************/
+
+	if(m_info.hSubMenu != 0)
+	{
+		RemoveMenu(m_parent->m_handle, (UINT)this, MF_BYCOMMAND);
+		m_info.hSubMenu = (menu != 0 ? menu->GetHandle() : 0);
+		InsertMenuItemW(m_parent->m_handle, m_position, true, &m_info);
+	}
+	else
+	{
+		m_info.hSubMenu = (menu != 0 ? menu->GetHandle() : 0);
+		UpdateInfo();
+	}
 }
 
 void MenuItem::SetText(const wchar_t *text)
 {
-	if(m_text)
-		free(m_text);
+	if(m_info.dwTypeData != 0)
+		free(m_info.dwTypeData);
 
-	if(text != 0)
-		m_text = _wcsdup(text);
+	m_info.dwTypeData = _wcsdup(text);
+	m_info.cch = wcslen(text) + 1;
 
-	MENUITEMINFOW info;
-	info.cbSize = sizeof(MENUITEMINFOW);
-	info.fMask = MIIM_STRING;
-	info.cch = wcslen(text);
-	info.dwTypeData = m_text;
-	::SetMenuItemInfo(m_parent->m_handle, (UINT)this, false, &info);
+	UpdateInfo();
 }
 
-const wchar_t *MenuItem::GetText()
+void MenuItem::SetImage(Bitmap *bitmap)
 {
-	return m_text;
+	m_info.hbmpItem = (HBITMAP)bitmap->GetHandle();
+
+	UpdateInfo();
+}
+
+void MenuItem::SetCheckedImage(Bitmap *bitmap)
+{
+	m_info.hbmpChecked = (HBITMAP)bitmap->GetHandle();
+
+	UpdateInfo();
+}
+
+void MenuItem::SetUncheckedImage(Bitmap *bitmap)
+{
+	m_info.hbmpUnchecked = (HBITMAP)bitmap->GetHandle();
+
+	UpdateInfo();
 }
 
 void MenuItem::SetChecked(bool checked)
 {
-	::CheckMenuItem(m_parent->m_handle, (UINT)this, MF_BYCOMMAND | (checked ? MF_CHECKED : MF_UNCHECKED));
+	m_info.fState = (checked ? (m_info.fState | MF_CHECKED) : (m_info.fState & ~MF_CHECKED));
+	
+	UpdateInfo();
 }
 
 bool MenuItem::GetChecked()
 {
-	return (::GetMenuState(m_parent->m_handle, (UINT)this, MF_BYCOMMAND) & MF_CHECKED) > 0;
+	return (m_info.fState & MF_CHECKED) > 0;
 }
 
-bool MenuItem::OnTextChanged(const wchar_t *newText,const wchar_t *oldText)
+void MenuItem::OnMouseClick(MouseButton button)
 {
-	return false;
+
 }
 
-bool MenuItem::OnMouseClick(MouseButton button)
+void MenuItem::UpdateInfo()
 {
-	return false;
+	if(m_parent != 0)
+	{
+		m_info.fMask = MIIM_SUBMENU | MIIM_DATA | MIIM_STRING | MIIM_FTYPE | MIIM_STRING | MIIM_BITMAP | MIIM_CHECKMARKS | MIIM_ID | MIIM_STATE;
+		SetMenuItemInfoW(m_parent->m_handle, (UINT)this, false, &m_info);
+	}
 }

@@ -1,40 +1,29 @@
 #include "Menu.h"
-#include "../Bitmap.h"
 
 using namespace Goop;
 
-Menu::Menu(Menu *parent, const wchar_t *text) : MenuItem(parent, text), m_handle(0)
+Menu::Menu(bool popup)
 {
-	m_parent = parent;
+	memset(&m_info, 0, sizeof(MENUITEMINFOW));
+	m_info.cbSize = sizeof(MENUINFO);
+	m_info.fMask = MIM_BACKGROUND | MIM_HELPID | MIM_MAXHEIGHT | MIM_MENUDATA | MIM_STYLE;
 
-	MENUINFO menuInfo;
-	menuInfo.cbSize = sizeof(MENUINFO);
-	menuInfo.fMask = MIM_MENUDATA | MIM_STYLE;
-	menuInfo.dwMenuData = (ULONG_PTR)this;
-	menuInfo.dwStyle = MNS_NOTIFYBYPOS;
-
-	if(m_parent == 0)
-	{
-		m_handle = ::CreateMenu();
-	}
-	else
-	{
+	if(popup)
 		m_handle = ::CreatePopupMenu();
+	else
+		m_handle = ::CreateMenu();
 
-		MENUITEMINFOW itemInfo;
-		itemInfo.cbSize = sizeof(MENUITEMINFOW);
-		itemInfo.hSubMenu = m_handle;
-		itemInfo.fMask = MIIM_SUBMENU;
+	GetMenuInfo(m_handle, &m_info);
 
-		SetMenuItemInfo(parent->m_handle, (UINT)this, false, &itemInfo);
-	}
+	m_info.dwStyle = MNS_NOTIFYBYPOS;
+	m_info.dwMenuData = (ULONG_PTR)this;
 
-	SetMenuInfo(m_handle, &menuInfo);
+	SetMenuInfo(m_handle, &m_info);
 }
 
-HMENU Menu::GetHandle()
+Menu::~Menu()
 {
-	return m_handle;
+	DestroyMenu(m_handle);
 }
 
 Menu *Menu::GetByHandle(HMENU handle)
@@ -55,4 +44,21 @@ MenuItem *Menu::GetItemByIndex(int index)
 	GetMenuItemInfo(m_handle, index, true, &info );
 
 	return (MenuItem *)info.dwItemData;
+}
+
+HMENU Menu::GetHandle()
+{
+	return m_handle;
+}
+
+void Menu::AddItem(MenuItem *item)
+{
+	item->m_position = InsertMenuItemW(m_handle, (UINT)item, false, &item->m_info);
+	item->m_parent = this;
+}
+
+void Menu::ShowCheckmarks(bool show)
+{
+	m_info.dwStyle = (show ? m_info.dwStyle & ~MNS_NOCHECK : m_info.dwStyle | MNS_NOCHECK);
+	SetMenuInfo(m_handle, &m_info);
 }

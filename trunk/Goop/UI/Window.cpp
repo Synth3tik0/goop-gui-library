@@ -69,7 +69,7 @@ Menu *Window::GetMenu()
 void Window::SetMenu(Menu *menu)
 {
 	m_menu = menu;
-	::SetMenu(m_handle, m_menu->m_handle);
+	::SetMenu(m_handle, m_menu->GetHandle());
 }
 
 void Window::ShowButton(WindowButton button, bool show)

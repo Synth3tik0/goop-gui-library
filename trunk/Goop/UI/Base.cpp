@@ -376,8 +376,7 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 			{
 				Menu *menu = Menu::GetByHandle((HMENU)lparam);
 				MenuItem *item = menu->GetItemByIndex(wparam);
-				if(item->OnMouseClick(Left))
-					return 0;
+				item->OnMouseClick(Left);
 				
 				break;
 			}
