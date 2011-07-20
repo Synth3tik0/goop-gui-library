@@ -1,4 +1,4 @@
-#include "examples.h"
+﻿#include "examples.h"
 using namespace Goop;
 
 class ExampleTextbox;
@@ -51,4 +51,6 @@ void TextboxExample(TabContainer *tabContainer)
 
 		g_textBoxes[i] = box;
 	}
+
+	g_textBoxes[0]->SetPasswordCharacter(L'●');
 }

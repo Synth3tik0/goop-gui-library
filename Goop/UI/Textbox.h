@@ -15,6 +15,9 @@ namespace Goop
 		GOOP_API virtual void SetMultiline(bool multiline);
 		GOOP_API virtual bool GetMultiline();
 
+		GOOP_API virtual void SetPasswordCharacter(wchar_t character);
+		GOOP_API virtual wchar_t GetPasswordCharacter();
+
 		GOOP_API virtual void AppendText(const wchar_t *text);
 	private:
 		void SwitchMode(const wchar_t *text, Base *parent, DWORD style);
