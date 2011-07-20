@@ -71,11 +71,10 @@ namespace Goop
 		GOOP_API virtual bool OnPerformLayout();
 
 	protected:
-		Base();
-		~Base();
-		void InitializeBase();
-
-		static LRESULT Process(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);
+		GOOP_API Base();
+		GOOP_API ~Base();
+		GOOP_API void InitializeBase();
+		GOOP_API static LRESULT Process(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);
 
 		wchar_t *m_text;
 		HBRUSH m_background;
