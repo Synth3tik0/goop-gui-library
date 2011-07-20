@@ -3,38 +3,51 @@
 
 using namespace Goop;
 
-MenuItem::MenuItem(Menu *parent, const wchar_t *text) : m_text(0)
+MenuItem::MenuItem(Menu *parent, const wchar_t *text) : m_parent(0), m_text(0), m_bitmap(0)
 {
-	m_parent = parent;
+	if(parent != 0)
+	{
+		m_parent = parent;
+		m_text = _wcsdup(text);
+
+		MENUITEMINFOW info;
+		info.cbSize = sizeof(MENUITEMINFOW);
+		info.fMask = MIIM_ID | MIIM_DATA | MIIM_STRING | MIIM_FTYPE | MIIM_STATE;
+		info.wID = (UINT)this;
+		info.dwItemData = (DWORD)this;
+		info.dwTypeData = (wchar_t *)m_text;
+		info.cch = wcslen(m_text) + 1;
+		info.fState = MFS_UNCHECKED;
+		info.fType = MFT_STRING;
+
+		InsertMenuItemW(parent->m_handle, (UINT)this, false, &info);
+	}
+}
+
+MenuItem::MenuItem()
+{
+
+}
+
+void MenuItem::SetText(const wchar_t *text)
+{
+	if(m_text)
+		free(m_text);
 
 	if(text != 0)
 		m_text = _wcsdup(text);
 
+	MENUITEMINFOW info;
+	info.cbSize = sizeof(MENUITEMINFOW);
+	info.fMask = MIIM_STRING;
+	info.cch = wcslen(text);
+	info.dwTypeData = m_text;
+	::SetMenuItemInfo(m_parent->m_handle, (UINT)this, false, &info);
 }
 
-MenuItem::MenuItem(Menu *parent) : m_text(0)
+const wchar_t *MenuItem::GetText()
 {
-	m_parent = parent;
-}
-
-MenuItem::~MenuItem()
-{
-	DeleteMenu(m_parent->m_handle, (UINT)this, MF_BYCOMMAND);
-
-	if(m_text != 0)
-		free(m_text);
-
-	if(m_parent != 0)
-	{
-		for(unsigned int i = 0; i < m_parent->m_childItems.size(); i++)
-		{
-			if(m_parent->m_childItems[i] == this)
-			{
-				m_parent->m_childItems.erase(m_parent->m_childItems.begin() + i);
-				break;
-			}
-		}
-	}
+	return m_text;
 }
 
 void MenuItem::SetChecked(bool checked)
@@ -47,67 +60,8 @@ bool MenuItem::GetChecked()
 	return (::GetMenuState(m_parent->m_handle, (UINT)this, MF_BYCOMMAND) & MF_CHECKED) > 0;
 }
 
-const wchar_t *MenuItem::GetText()
-{
-	return m_text;
-}
-
-void MenuItem::SetText(const wchar_t *text)
-{
-	if(m_parent == 0)
-		return;
-
-	if(OnTextChanged(text, m_text))
-		return;
-
-	if(m_text != 0)
-		free(m_text);
-
-	if(text != 0)
-		m_text = _wcsdup(text);
-	else
-		m_text = 0;
-	
-	MENUITEMINFOW info;
-	info.cbSize = sizeof(MENUITEMINFOW);
-	info.fMask = MIIM_STRING;
-	info.cch = wcslen(text);
-	info.dwTypeData = m_text;
-	SetInfo(info);
-}
-
-void MenuItem::SetImages(Bitmap *checked, Bitmap *unchecked)
-{
-	if(m_parent == 0)
-		return;
-
-	MENUITEMINFOW info;
-	info.cbSize = sizeof(MENUITEMINFOW);
-	info.fMask = MIIM_CHECKMARKS;	
-	info.hbmpChecked = (HBITMAP)checked->GetHandle();
-	info.hbmpUnchecked = (HBITMAP)unchecked->GetHandle();
-
-	::SetMenuItemInfo(m_parent->m_handle, (UINT)this, false, &info);
-}
-
-void MenuItem::SetInfo(MENUITEMINFOW info)
-{
-	::SetMenuItemInfo(m_parent->m_handle, (UINT)this, false, &info);
-}
-
-MENUITEMINFOW MenuItem::GetInfo(DWORD mask)
-{
-	MENUITEMINFOW info;
-	info.cbSize = sizeof(MENUITEMINFOW);
-	info.fMask = mask;
-	::GetMenuItemInfo(m_parent->m_handle, (UINT)this, false, &info);
-
-	return info;
-}
-
 bool MenuItem::OnTextChanged(const wchar_t *newText,const wchar_t *oldText)
 {
-
 	return false;
 }
 
