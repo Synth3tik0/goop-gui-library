@@ -12,7 +12,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 	Textbox textbox = Textbox(TEXT(""), &window);
 	textbox.SetPosition(Vector2D(5, 375));
 	textbox.SetMultiline(true);
-	textbox.SetSize(Vector2D(574, 130));
+	textbox.SetSize(Vector2D(574, 110));
 
 	g_outputBox = &textbox;
 
@@ -23,6 +23,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 	container.SetSize(Vector2D(576, 363));
 
 	// Create Examples
+	MenuExample(&window);
+
 	ButtonExample(&container);
 	LabelExample(&container);
 	RadioExample(&container);
