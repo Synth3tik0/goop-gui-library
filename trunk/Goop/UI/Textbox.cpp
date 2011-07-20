@@ -45,7 +45,7 @@ void Textbox::SetMultiline(bool multiline)
 	if(multiline)
 		SwitchMode(GetText(), GetParent(), GetStyle() | ES_MULTILINE);
 	else
-		SwitchMode(GetText(), GetParent(), GetStyle() & ~ES_MULTILINE);
+		SwitchMode(GetText(), GetParent(), GetStyle() & (~ES_MULTILINE));
 }
 
 bool Textbox::GetMultiline()
@@ -57,7 +57,7 @@ void Textbox::AppendText(const wchar_t *text)
 {
 	HWND currentFocus = ::GetFocus();
 
-	SendMessage(m_handle, WM_SETFOCUS, (WPARAM)m_handle, 0);
+	SetFocus(m_handle);
 	SendMessage(m_handle, EM_SETSEL, (WPARAM)-1, (LPARAM)-1);
 	SendMessage(m_handle, EM_REPLACESEL, 0, (LPARAM)text);
 
