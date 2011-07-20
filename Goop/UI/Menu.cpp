@@ -4,10 +4,10 @@ using namespace Goop;
 
 Menu::Menu(bool popup)
 {
-	memset(&m_info, 0, sizeof(MENUITEMINFOW));
+	memset(&m_info, 0, sizeof(MENUINFO));
 	m_info.cbSize = sizeof(MENUINFO);
 	m_info.fMask = MIM_BACKGROUND | MIM_HELPID | MIM_MAXHEIGHT | MIM_MENUDATA | MIM_STYLE;
-
+	
 	if(popup)
 		m_handle = ::CreatePopupMenu();
 	else
