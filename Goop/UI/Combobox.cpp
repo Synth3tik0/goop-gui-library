@@ -2,16 +2,17 @@
 #include <CommCtrl.h>
 #include <WindowsX.h>
 #include "../MessageProxy.h"
+#include <cstdarg>
 
 using namespace Goop;
 
 const static HBRUSH g_whiteBrush = CreateSolidBrush(RGB(255, 255, 255));
 
-Combobox::Combobox(Base *parent)
+BaseCombobox::BaseCombobox(Base *parent, DWORD style)
 {
-	HINSTANCE instanceHandle = GetModuleHandle( NULL );
+	HINSTANCE instanceHandle = GetModuleHandle(0);
 
-	m_handle = (HWND)CreateWindowExW(0, WC_COMBOBOXW, L"", CBS_DROPDOWN | CBS_HASSTRINGS | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
+	m_handle = (HWND)CreateWindowExW(0, WC_COMBOBOXW, L"", style | CBS_HASSTRINGS | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
 	
 	InitializeBase();
 	m_defaultProcess = SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)Base::Process);
@@ -23,27 +24,40 @@ Combobox::Combobox(Base *parent)
 	GetComboBoxInfo(m_handle, &info);
 
 	// Set the GWLP_USERDATA variable to the original WNDPROC, and set the new WNDPROC to our overloaded one that sets the background.
-	SetWindowLongPtr(info.hwndList, GWLP_USERDATA, (LONG_PTR)SetWindowLongPtr(info.hwndList, GWLP_WNDPROC, (LONG_PTR)Combobox::ListProcess));
+	SetWindowLongPtr(info.hwndList, GWLP_USERDATA, (LONG_PTR)SetWindowLongPtr(info.hwndList, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ListProcess));
 }
 
-Combobox::~Combobox()
+BaseCombobox::~BaseCombobox()
 {
 	
 }
 
-void Combobox::AddItem(const wchar_t *item)
+void BaseCombobox::AddItem(const wchar_t *item)
 {
 	::SendMessageW(m_handle, CB_ADDSTRING, 0, (LPARAM)item);
+	::SendMessageW(m_handle, CB_SETCURSEL, 0, 0);
 }
 
-unsigned int Combobox::GetCurrentSelection()
+void BaseCombobox::AddItems(unsigned int itemCount, ...)
+{
+	va_list args;
+	va_start(args, itemCount);
+
+	for(int i = 0; i < itemCount; i++)
+		::SendMessageW(m_handle, CB_ADDSTRING, 0, va_arg(args, LPARAM));
+
+	va_end(args);
+	::SendMessageW(m_handle, CB_SETCURSEL, 0, 0);
+}
+
+unsigned int BaseCombobox::GetCurrentSelection()
 {
 	return ComboBox_GetCurSel(m_handle);
 }
 
-const wchar_t *Combobox::GetOptionText(unsigned int id)
+const wchar_t *BaseCombobox::GetOptionText(unsigned int id)
 {
-	if(m_text != 0);
+	if(m_text != 0)
 		free(m_text);
 
 	m_text = (wchar_t *)malloc(sizeof(wchar_t) * (ComboBox_GetLBTextLen(m_handle, id) + 1));
@@ -53,12 +67,12 @@ const wchar_t *Combobox::GetOptionText(unsigned int id)
 }
 
 
-void Combobox::OnSelectionChanged(unsigned int index)
+void BaseCombobox::OnSelectionChanged(unsigned int index)
 {
 
 }
 
-LRESULT Combobox::ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT BaseCombobox::ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam)
 {
 	WNDPROC defaultProcess = (WNDPROC)GetWindowLongPtr(hWindow, GWLP_USERDATA);
 
@@ -72,3 +86,7 @@ LRESULT Combobox::ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LP
 
 	return CallWindowProc(defaultProcess, hWindow, uMsg, wParam, lParam);
 }
+
+Combobox::Combobox(Base *parent) : BaseCombobox(parent, CBS_DROPDOWN) {}
+Listbox::Listbox(Base *parent) : BaseCombobox(parent, CBS_DROPDOWNLIST) {}
+List::List(Base *parent) : BaseCombobox(parent, CBS_SIMPLE) {}

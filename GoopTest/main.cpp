@@ -16,7 +16,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 
 	g_outputBox = &textbox;
 
-	textbox.AppendText(TEXT("Started Goop control test\r\n"));
+	textbox.AppendText(TEXT("Started Goop control test\n"));
 
 	TabContainer container = TabContainer(&window);
 	container.SetPosition(Vector2D(5, 5));

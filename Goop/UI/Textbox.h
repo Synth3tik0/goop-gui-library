@@ -19,6 +19,7 @@ namespace Goop
 		GOOP_API virtual wchar_t GetPasswordCharacter();
 
 		GOOP_API virtual void AppendText(const wchar_t *text);
+		GOOP_API virtual void AppendText(int stringCount, ...);
 	private:
 		void SwitchMode(const wchar_t *text, Base *parent, DWORD style);
 		MessageProxy *m_proxy;

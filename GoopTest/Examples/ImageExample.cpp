@@ -3,7 +3,7 @@ using namespace Goop;
 
 void ImageExample(TabContainer *tabContainer)
 {
-	g_outputBox->AppendText(TEXT("Created Image Example tab\r\n"));
+	g_outputBox->AppendText(TEXT("Created Image Example tab\n"));
 
 	Tab *tab = tabContainer->AddTab(TEXT("Image"));
 
