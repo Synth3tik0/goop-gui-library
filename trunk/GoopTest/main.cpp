@@ -31,7 +31,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 	TextboxExample(&container);
 	ComboboxExample(&container);
 	ProgressExample(&container);
-	IPAddressControlExample(&container);
+	//IPAddressControlExample(&container);
 
 	window.Show();
 
