@@ -87,6 +87,7 @@
     <ClInclude Include="UI\Base.h" />
     <ClInclude Include="UI\Button.h" />
     <ClInclude Include="UI\Checkbox.h" />
+    <ClInclude Include="UI\Combobox.h" />
     <ClInclude Include="UI\Group.h" />
     <ClInclude Include="UI\Image.h" />
     <ClInclude Include="UI\Label.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="UI\Base.cpp" />
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="UI\Checkbox.cpp" />
+    <ClCompile Include="UI\Combobox.cpp" />
     <ClCompile Include="UI\Group.cpp" />
     <ClCompile Include="UI\Image.cpp" />
     <ClCompile Include="UI\Label.cpp" />

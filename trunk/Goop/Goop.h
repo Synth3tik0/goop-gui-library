@@ -19,6 +19,7 @@
 #include "UI\Image.h"
 #include "UI\Group.h"
 #include "UI\Checkbox.h"
+#include "UI\Combobox.h"
 #include "UI\TabContainer.h"
 #include "UI\Tab.h"
 
