@@ -22,5 +22,6 @@
 #include "UI\Combobox.h"
 #include "UI\TabContainer.h"
 #include "UI\Tab.h"
+#include "UI\Progressbar.h"
 
 #endif

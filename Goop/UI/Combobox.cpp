@@ -12,7 +12,7 @@ BaseCombobox::BaseCombobox(Base *parent, DWORD style)
 {
 	HINSTANCE instanceHandle = GetModuleHandle(0);
 
-	m_handle = (HWND)CreateWindowExW(0, WC_COMBOBOXW, L"", style | CBS_HASSTRINGS | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
+	m_handle = (HWND)CreateWindowExW(0, WC_COMBOBOXW, L"", style | CBS_HASSTRINGS, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
 	
 	InitializeBase();
 	m_defaultProcess = SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)Base::Process);
@@ -25,6 +25,7 @@ BaseCombobox::BaseCombobox(Base *parent, DWORD style)
 
 	// Set the GWLP_USERDATA variable to the original WNDPROC, and set the new WNDPROC to our overloaded one that sets the background.
 	SetWindowLongPtr(info.hwndList, GWLP_USERDATA, (LONG_PTR)SetWindowLongPtr(info.hwndList, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ListProcess));
+	Show();
 }
 
 BaseCombobox::~BaseCombobox()
@@ -43,7 +44,7 @@ void BaseCombobox::AddItems(unsigned int itemCount, ...)
 	va_list args;
 	va_start(args, itemCount);
 
-	for(int i = 0; i < itemCount; i++)
+	for(unsigned int i = 0; i < itemCount; i++)
 		::SendMessageW(m_handle, CB_ADDSTRING, 0, va_arg(args, LPARAM));
 
 	va_end(args);

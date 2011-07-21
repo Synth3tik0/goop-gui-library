@@ -64,6 +64,7 @@ namespace Goop
 		GOOP_API virtual bool OnTextChanged(const wchar_t *text);
 		GOOP_API virtual bool OnCreate();
 		GOOP_API virtual bool OnClose();
+		GOOP_API virtual bool OnUpdate();
 		GOOP_API virtual bool OnDestroy();
 		GOOP_API virtual bool OnPaint();
 		GOOP_API virtual bool OnFocus(Base *oldFocus);
