@@ -24,13 +24,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 
 	// Create Examples
 	MenuExample(&window);
-
 	ButtonExample(&container);
 	LabelExample(&container);
 	RadioExample(&container);
 	ImageExample(&container);
 	TextboxExample(&container);
 	ComboboxExample(&container);
+	ProgressExample(&container);
 
 	window.Show();
 
