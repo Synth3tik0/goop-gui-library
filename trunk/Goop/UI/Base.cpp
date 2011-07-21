@@ -63,8 +63,8 @@ void Base::SetParent(Base *parent)
 		RemoveStyle(WS_CHILD);
 	} 
 	else 
-	{ // If we're being adoted.
-		AddStyle(WS_CHILD | WS_VISIBLE);
+	{ // If we're being adopted.
+		AddStyle(WS_CHILD);
 		RemoveStyle(WS_CAPTION);
 
 		m_parent = parent;
@@ -194,6 +194,8 @@ void Base::Update()
 	{
 		m_children[i]->Update();
 	}
+
+	OnUpdate();
 }
 
 void Base::Destroy()
@@ -304,6 +306,11 @@ bool Base::OnClose()
 {
 	Destroy();
 	return true;
+}
+
+bool Base::OnUpdate()
+{
+	return false;
 }
 
 bool Base::OnDestroy()
