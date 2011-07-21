@@ -23,5 +23,6 @@
 #include "UI\TabContainer.h"
 #include "UI\Tab.h"
 #include "UI\Progressbar.h"
+#include "UI\IPAddressControl.h"
 
 #endif

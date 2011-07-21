@@ -3,14 +3,14 @@
 
 using namespace Goop;
 
-MessageProxy::MessageProxy(Base *parent)
+MessageProxy::MessageProxy(Base *client)
 {
 	HINSTANCE instanceHandle = GetModuleHandle( NULL );
 	m_handle = CreateWindowExW(0, L"STATIC", L"", 0, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
 	SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)MessageProxy::Process);
 	SetWindowLongPtr(m_handle, GWLP_USERDATA, (LONG_PTR)this);
 
-	m_parent = parent;
+	m_client = client;
 }
 
 MessageProxy::~MessageProxy()
@@ -27,7 +27,7 @@ LRESULT MessageProxy::Process(HWND window, unsigned int msg, WPARAM wparam, LPAR
 		{
 			if(HIWORD(wparam) == EN_CHANGE)
 			{
-				proxy->m_parent->OnTextChanged(proxy->m_parent->GetText());
+				proxy->m_client->OnTextChanged(proxy->m_client->GetText());
 			}
 			return 0;
 		}

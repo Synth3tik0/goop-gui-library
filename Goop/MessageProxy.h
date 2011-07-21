@@ -12,11 +12,11 @@ namespace Goop
 	public:
 		HWND m_handle;
 
-		MessageProxy(Base *parent);
+		MessageProxy(Base *client);
 		~MessageProxy();
 	private:
 		static LRESULT Process(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);
-		Base *m_parent;
+		Base *m_client;
 	};
 }
 
