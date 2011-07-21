@@ -2,8 +2,10 @@
 #include "Menu.h"
 #include "Checkbox.h"
 #include "TabContainer.h"
+#include "Combobox.h"
 #include "Tab.h"
 #include <CommCtrl.h>
+#include <WindowsX.h>
 
 using namespace Goop;
 
@@ -182,7 +184,7 @@ void Base::Update()
 {
 	MSG msg;
 	unsigned int i = 0;
-	while(i++ < 16 && PeekMessage(&msg, m_handle, 0, 0, PM_REMOVE) > 0)
+	while(i++ < 16 && PeekMessage(&msg, 0, 0, 0, PM_REMOVE) > 0)
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
@@ -549,6 +551,19 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 
 						break;
 					}
+				}
+				break;
+			}
+		case WM_COMMAND:
+			{
+				switch(HIWORD(wparam))
+				{
+				case CBN_SELENDOK:
+					{
+						((Combobox *)element)->OnSelectionChanged(ComboBox_GetCurSel(element->GetHandle()));
+					}
+				default:
+					break;
 				}
 				break;
 			}
