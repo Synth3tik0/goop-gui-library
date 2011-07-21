@@ -1,5 +1,6 @@
 #include "Textbox.h"
 #include "../MessageProxy.h"
+#include <cstdarg>
 
 using Goop::Textbox;
 
@@ -70,6 +71,24 @@ void Textbox::AppendText(const wchar_t *text)
 	SetFocus(m_handle);
 	SendMessage(m_handle, EM_SETSEL, (WPARAM)-1, (LPARAM)-1);
 	SendMessage(m_handle, EM_REPLACESEL, 0, (LPARAM)text);
+
+	if(currentFocus != 0)
+		SetFocus(currentFocus);
+}
+
+void Textbox::AppendText(int stringCount, ...)
+{
+	HWND currentFocus = ::GetFocus();
+	SetFocus(m_handle);
+
+	SendMessage(m_handle, EM_SETSEL, (WPARAM)-1, (LPARAM)-1);
+
+	va_list args;
+	va_start(args, stringCount);
+	for(int i = 0; i < stringCount; i++)
+		::SendMessage(m_handle, EM_REPLACESEL, 0, va_arg(args, LPARAM));
+
+	va_end(args);
 
 	if(currentFocus != 0)
 		SetFocus(currentFocus);

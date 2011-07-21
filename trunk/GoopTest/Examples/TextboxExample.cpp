@@ -23,7 +23,7 @@ public:
 			}
 			g_outputBox->AppendText(TEXT("Set all textboxes to "));
 			g_outputBox->AppendText(GetText());
-			g_outputBox->AppendText(TEXT("\r\n"));
+			g_outputBox->AppendText(TEXT("\n"));
 
 			return true;
 		}
@@ -34,7 +34,7 @@ public:
 
 void TextboxExample(TabContainer *tabContainer)
 {
-	g_outputBox->AppendText(TEXT("Created Textbox Example tab\r\n"));
+	g_outputBox->AppendText(TEXT("Created Textbox Example tab\n"));
 
 	Tab *tab = tabContainer->AddTab(TEXT("Textbox"));
 

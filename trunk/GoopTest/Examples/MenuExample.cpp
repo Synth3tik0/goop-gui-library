@@ -14,13 +14,13 @@ public:
 		if(GetChecked())
 		{
 			SetChecked(false);
-			g_outputBox->AppendText(TEXT("Unchecked menu item\r\n"));
+			g_outputBox->AppendText(TEXT("Unchecked menu item\n"));
 			g_attachMenu->SetMenu(0);
 		}
 		else
 		{
 			SetChecked(true);
-			g_outputBox->AppendText(TEXT("Checked menu item\r\n"));
+			g_outputBox->AppendText(TEXT("Checked menu item\n"));
 			g_attachMenu->SetMenu(g_exampleMenu);
 		}
 	}
@@ -28,7 +28,7 @@ public:
 
 void MenuExample(Window *window)
 {
-	g_outputBox->AppendText(TEXT("Created Menu Example\r\n"));
+	g_outputBox->AppendText(TEXT("Created Menu Example\n"));
 
 	Bitmap *bmp = new Bitmap(TEXT("goop.bmp"));
 

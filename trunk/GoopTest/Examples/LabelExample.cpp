@@ -3,7 +3,7 @@ using namespace Goop;
 
 void LabelExample(TabContainer *tabContainer)
 {
-	g_outputBox->AppendText(TEXT("Created Label Example tab\r\n"));
+	g_outputBox->AppendText(TEXT("Created Label Example tab\n"));
 
 	Tab *tab = tabContainer->AddTab(TEXT("Label"));
 

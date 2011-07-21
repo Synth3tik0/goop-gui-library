@@ -11,7 +11,7 @@ public:
 	bool OnMouseClick(Vector2D position, MouseButton button)
 	{
 		g_outputBox->AppendText(GetText());
-		g_outputBox->AppendText(TEXT(" was pressed!\r\n"));
+		g_outputBox->AppendText(TEXT(" was pressed!\n"));
 
 		g_otherButton->SetEnabled(true);
 		g_otherButton = this;
@@ -23,7 +23,7 @@ public:
 
 void ButtonExample(TabContainer *tabContainer)
 {
-	g_outputBox->AppendText(TEXT("Created Button Example tab\r\n"));
+	g_outputBox->AppendText(TEXT("Created Button Example tab\n"));
 
 	Tab *tab = tabContainer->AddTab(TEXT("Button"));
 

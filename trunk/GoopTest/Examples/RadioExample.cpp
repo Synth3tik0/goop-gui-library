@@ -42,7 +42,7 @@ public:
 		g_outputBox->AppendText(m_parent->GetText());
 		g_outputBox->AppendText(TEXT("->"));
 		g_outputBox->AppendText(GetText());
-		g_outputBox->AppendText(TEXT(" was selected!\r\n"));
+		g_outputBox->AppendText(TEXT(" was selected!\n"));
 
 		return false;
 	}
@@ -56,7 +56,7 @@ public:
 	bool OnChecked()
 	{
 		g_outputBox->AppendText(GetText());
-		g_outputBox->AppendText(TEXT(" was checked!\r\n"));
+		g_outputBox->AppendText(TEXT(" was checked!\n"));
 
 		return false;
 	}
@@ -64,7 +64,7 @@ public:
 	bool OnUnchecked()
 	{
 		g_outputBox->AppendText(GetText());
-		g_outputBox->AppendText(TEXT(" was UNchecked!\r\n"));
+		g_outputBox->AppendText(TEXT(" was UNchecked!\n"));
 
 		return false;
 	}
@@ -72,7 +72,7 @@ public:
 
 void RadioExample(TabContainer *tabContainer)
 {
-	g_outputBox->AppendText(TEXT("Created Radio Example tab\r\n"));
+	g_outputBox->AppendText(TEXT("Created Radio Example tab\n"));
 
 	Tab *tab = tabContainer->AddTab(TEXT("Radio"));
 
