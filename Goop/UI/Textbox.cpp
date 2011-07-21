@@ -32,7 +32,7 @@ void Textbox::SwitchMode(const wchar_t *text, Base *parent, DWORD style)
 
 Textbox::Textbox(const wchar_t *text, Base *parent) : m_proxy(0)
 {
-	SwitchMode(text, parent, WS_VISIBLE | ES_AUTOVSCROLL | ES_AUTOHSCROLL);
+	SwitchMode(text, parent, ES_AUTOVSCROLL | ES_AUTOHSCROLL);
 	SetParent(parent);
 	SetText(text);
 }
