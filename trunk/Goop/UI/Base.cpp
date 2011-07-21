@@ -11,7 +11,7 @@ using namespace Goop;
 
 Base::Base() : m_background(0), m_font(0), m_text(0), m_position(0, 0), m_size(0, 0), m_handle(0), m_parent(0), m_defaultProcess(0)
 {
-	
+
 }
 
 Base::~Base()

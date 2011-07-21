@@ -84,6 +84,7 @@
     <ClCompile Include="Examples\ButtonExample.cpp" />
     <ClCompile Include="Examples\ComboboxExample.cpp" />
     <ClCompile Include="Examples\ImageExample.cpp" />
+    <ClCompile Include="Examples\IpAddressExample.cpp" />
     <ClCompile Include="Examples\LabelExample.cpp" />
     <ClCompile Include="Examples\MenuExample.cpp" />
     <ClCompile Include="Examples\ProgressExample.cpp" />
