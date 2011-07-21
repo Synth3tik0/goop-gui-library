@@ -12,4 +12,5 @@ void RadioExample(Goop::TabContainer *tab);
 void ImageExample(Goop::TabContainer *tab);
 void TextboxExample(Goop::TabContainer *tab);
 void ComboboxExample(Goop::TabContainer *tab);
+void ProgressExample(Goop::TabContainer *tab);
 #endif

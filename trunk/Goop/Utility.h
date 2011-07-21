@@ -9,7 +9,15 @@ namespace Goop
 
 	typedef enum
 	{
-		Left,
+		Marquee = 1,
+		Smooth,
+		SmoothReverse,
+		Vertical,
+	} ProgressStyle;
+
+	typedef enum
+	{
+		Left = 1,
 		Right,
 		Middle,
 	} MouseButton;
