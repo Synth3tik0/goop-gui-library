@@ -15,6 +15,12 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{3500c8f4-1a0d-4b43-9458-220ccbb76e86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Dialog">
+      <UniqueIdentifier>{c6c00068-4243-46e9-bd93-50340849d10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dialog">
+      <UniqueIdentifier>{497bb5b5-b78c-4585-8315-d4a95508dc4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Goop.h">
@@ -77,6 +83,12 @@
     <ClInclude Include="UI\Progressbar.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Dialog\OpenFile.h">
+      <Filter>Header Files\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog\SaveFile.h">
+      <Filter>Header Files\Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\Base.cpp">
@@ -138,6 +150,12 @@
     </ClCompile>
     <ClCompile Include="UI\IPAddressControl.cpp">
       <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\OpenFile.cpp">
+      <Filter>Source Files\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog\SaveFile.cpp">
+      <Filter>Source Files\Dialog</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
