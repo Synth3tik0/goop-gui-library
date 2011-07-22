@@ -123,6 +123,7 @@
     <ClCompile Include="UI\Tab.cpp" />
     <ClCompile Include="UI\TabContainer.cpp" />
     <ClCompile Include="UI\Textbox.cpp" />
+    <ClCompile Include="UI\TreeNode.cpp" />
     <ClCompile Include="UI\TreeView.cpp" />
     <ClCompile Include="UI\Window.cpp" />
     <ClCompile Include="Utility.cpp" />
