@@ -89,6 +89,9 @@
     <ClInclude Include="Dialog\SaveFile.h">
       <Filter>Header Files\Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="UI\TreeView.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UI\Base.cpp">
@@ -156,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="Dialog\SaveFile.cpp">
       <Filter>Source Files\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\TreeView.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

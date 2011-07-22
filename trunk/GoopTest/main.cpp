@@ -32,6 +32,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 	ComboboxExample(&container);
 	ProgressExample(&container);
 	//IPAddressControlExample(&container);
+	TreeViewExample(&container);
 
 	window.Show();
 
