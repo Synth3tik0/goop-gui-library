@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Goop", "Goop\Goop.vcxproj", "{7F2A7AC9-F559-489A-B425-7E83088F8AE6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoopTest", "GoopTest\GoopTest.vcxproj", "{EF3706D3-3081-4EE8-A9EB-6C9438102B89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F2A7AC9-F559-489A-B425-7E83088F8AE6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7F2A7AC9-F559-489A-B425-7E83088F8AE6}.Debug|Win32.Build.0 = Debug|Win32
+		{7F2A7AC9-F559-489A-B425-7E83088F8AE6}.Release|Win32.ActiveCfg = Release|Win32
+		{7F2A7AC9-F559-489A-B425-7E83088F8AE6}.Release|Win32.Build.0 = Release|Win32
+		{EF3706D3-3081-4EE8-A9EB-6C9438102B89}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EF3706D3-3081-4EE8-A9EB-6C9438102B89}.Debug|Win32.Build.0 = Debug|Win32
+		{EF3706D3-3081-4EE8-A9EB-6C9438102B89}.Release|Win32.ActiveCfg = Release|Win32
+		{EF3706D3-3081-4EE8-A9EB-6C9438102B89}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
