@@ -14,4 +14,6 @@ void TextboxExample(Goop::TabContainer *tab);
 void ComboboxExample(Goop::TabContainer *tab);
 void ProgressExample(Goop::TabContainer *tab);
 void IPAddressControlExample(Goop::TabContainer *tab);
+void TreeViewExample(Goop::TabContainer *tab);
+
 #endif

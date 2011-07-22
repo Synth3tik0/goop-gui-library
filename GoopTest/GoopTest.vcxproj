@@ -90,6 +90,7 @@
     <ClCompile Include="Examples\ProgressExample.cpp" />
     <ClCompile Include="Examples\RadioExample.cpp" />
     <ClCompile Include="Examples\TextboxExample.cpp" />
+    <ClCompile Include="Examples\TreeViewExample.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -24,5 +24,6 @@
 #include "UI\Tab.h"
 #include "UI\Progressbar.h"
 #include "UI\IPAddressControl.h"
+#include "UI/TreeView.h"
 
 #endif
