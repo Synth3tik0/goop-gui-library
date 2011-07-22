@@ -183,14 +183,13 @@ HWND Base::GetHandle()
 void Base::Update()
 {
 	MSG msg;
-	unsigned int i = 0;
-	while(i++ < 16 && PeekMessage(&msg, 0, 0, 0, PM_REMOVE) > 0)
+	while(PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 
-	for(i = 0; i < m_children.size(); i++)
+	for(unsigned int i = 0; i < m_children.size(); i++)
 	{
 		m_children[i]->Update();
 	}
