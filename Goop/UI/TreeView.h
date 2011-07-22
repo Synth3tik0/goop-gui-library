@@ -1,7 +1,9 @@
 #ifndef TREEVIEW_H
 #define TREEVIEW_H
-
+#include <ddraw.h>
+#include <CommCtrl.h>
 #include "Base.h"
+
 namespace Goop
 {
 	class TreeView : public Base
@@ -21,6 +23,7 @@ namespace Goop
 		~TreeNode();
 
 	private:
+		TVITEM m_info;
 	};
 }
 
