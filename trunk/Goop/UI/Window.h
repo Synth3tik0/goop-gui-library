@@ -25,6 +25,8 @@ namespace Goop
 
 		GOOP_API virtual void ShowButton(WindowButton, bool show);
 	private:
+		GOOP_API static void RegisterWindowClass();
+
 		Menu *m_menu;
 	};
 }
