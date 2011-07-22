@@ -6,8 +6,6 @@
 
 using namespace Goop;
 
-const static HBRUSH g_whiteBrush = CreateSolidBrush(RGB(255, 255, 255));
-
 BaseCombobox::BaseCombobox(Base *parent, DWORD style)
 {
 	HINSTANCE instanceHandle = GetModuleHandle(0);
@@ -76,12 +74,13 @@ void BaseCombobox::OnSelectionChanged(unsigned int index)
 LRESULT BaseCombobox::ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam)
 {
 	WNDPROC defaultProcess = (WNDPROC)GetWindowLongPtr(hWindow, GWLP_USERDATA);
+	static const HBRUSH whiteBrush = CreateSolidBrush(RGB(255, 255, 255));
 
 	switch(uMsg)
 	{
 	case WM_CTLCOLOREDIT:
 		{
-			return (INT_PTR)g_whiteBrush;
+			return (INT_PTR)whiteBrush;
 		}
 	}
 
