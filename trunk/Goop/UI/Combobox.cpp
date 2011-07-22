@@ -20,9 +20,13 @@ BaseCombobox::BaseCombobox(Base *parent, DWORD style)
 	COMBOBOXINFO info;
 	info.cbSize = sizeof(COMBOBOXINFO);
 	GetComboBoxInfo(m_handle, &info);
+	
+	m_comboData.listProc = (LONG_PTR)SetWindowLongPtr(info.hwndList, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ListProcess);
+	m_comboData.itemProc = (LONG_PTR)SetWindowLongPtr(info.hwndItem, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ItemProcess);
+	m_comboData.parent = this;
 
-	// Set the GWLP_USERDATA variable to the original WNDPROC, and set the new WNDPROC to our overloaded one that sets the background.
-	SetWindowLongPtr(info.hwndList, GWLP_USERDATA, (LONG_PTR)SetWindowLongPtr(info.hwndList, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ListProcess));
+	SetWindowLongPtr(info.hwndItem, GWLP_USERDATA, (LONG_PTR)&m_comboData);
+	SetWindowLongPtr(info.hwndList, GWLP_USERDATA, (LONG_PTR)&m_comboData);
 	Show();
 }
 
@@ -73,7 +77,7 @@ void BaseCombobox::OnSelectionChanged(unsigned int index)
 
 LRESULT BaseCombobox::ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam)
 {
-	WNDPROC defaultProcess = (WNDPROC)GetWindowLongPtr(hWindow, GWLP_USERDATA);
+	ComboData *data = (ComboData *)GetWindowLongPtr(hWindow, GWLP_USERDATA);
 	static const HBRUSH whiteBrush = CreateSolidBrush(RGB(255, 255, 255));
 
 	switch(uMsg)
@@ -84,7 +88,24 @@ LRESULT BaseCombobox::ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam
 		}
 	}
 
-	return CallWindowProc(defaultProcess, hWindow, uMsg, wParam, lParam);
+	return CallWindowProc((WNDPROC)data->listProc, hWindow, uMsg, wParam, lParam);
+}
+
+LRESULT BaseCombobox::ItemProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam)
+{
+	ComboData *data = (ComboData *)GetWindowLongPtr(hWindow, GWLP_USERDATA);
+	switch(uMsg)
+	{
+	case WM_CHAR:
+		{
+			if(data->parent->OnKeyInput((wchar_t)wParam))
+				return 0;
+
+			break;
+		}
+	}
+
+	return CallWindowProc((WNDPROC)data->itemProc, hWindow, uMsg, wParam, lParam);
 }
 
 Combobox::Combobox(Base *parent) : BaseCombobox(parent, CBS_DROPDOWN) {}

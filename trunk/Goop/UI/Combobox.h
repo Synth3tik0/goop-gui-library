@@ -2,6 +2,14 @@
 #define COMBOBOX_H
 
 #include "Base.h"
+
+typedef struct
+{
+	Goop::Base *parent;
+	LONG_PTR itemProc;
+	LONG_PTR listProc;
+} ComboData;
+
 namespace Goop
 {
 	class MessageProxy;
@@ -21,6 +29,10 @@ namespace Goop
 
 		GOOP_API virtual void OnSelectionChanged(unsigned int index);
 		GOOP_API static LRESULT ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);	
+		GOOP_API static LRESULT ItemProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);	
+	
+	private:
+		ComboData m_comboData;
 	};
 
 	class Combobox : public BaseCombobox

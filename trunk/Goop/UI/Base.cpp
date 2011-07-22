@@ -18,6 +18,8 @@ Base::~Base()
 {
 	if(m_text != 0)
 		free(m_text);
+
+	::CloseWindow(m_handle);
 }
 
 void Base::InitializeBase()
@@ -562,14 +564,29 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 			}
 		case WM_COMMAND:
 			{
+
 				switch(HIWORD(wparam))
 				{
 				case CBN_SELENDOK:
 					{
-						((Combobox *)element)->OnSelectionChanged(ComboBox_GetCurSel(element->GetHandle()));
+						BaseCombobox *box = (BaseCombobox *)element;
+
+						int selection = ComboBox_GetCurSel(box->GetHandle());
+						box->OnSelectionChanged(selection);
+						box->OnTextChanged(box->GetOptionText(selection));
+
+						break;
+					}
+				case CBN_EDITCHANGE:
+					{
+						BaseCombobox *box = (BaseCombobox *)element;
+						box->OnTextChanged(box->GetText());
+						break;
 					}
 				default:
-					break;
+					{
+						break;
+					}
 				}
 				break;
 			}
@@ -584,6 +601,6 @@ LRESULT Base::Process(HWND window, unsigned int msg, WPARAM wparam, LPARAM lpara
 			return CallWindowProc((WNDPROC)element->m_defaultProcess, window, msg, wparam, lparam);
 		}
 	}
-
+	
 	return DefWindowProc(window, msg, wparam, lparam);
 }
