@@ -13,6 +13,15 @@ namespace Goop
 	private:
 
 	};
+
+	class TreeNode : public Base
+	{
+	public:
+		TreeNode();
+		~TreeNode();
+
+	private:
+	};
 }
 
 #endif
