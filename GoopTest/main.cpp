@@ -29,9 +29,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLin
 	RadioExample(&container);
 	ImageExample(&container);
 	TextboxExample(&container);
-	ComboboxExample(&container);
+	//ComboboxExample(&container);
 	ProgressExample(&container);
-	//IPAddressControlExample(&container);
 	TreeViewExample(&container);
 
 	window.Show();
