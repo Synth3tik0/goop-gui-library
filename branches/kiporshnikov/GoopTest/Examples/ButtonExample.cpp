@@ -10,8 +10,7 @@ public:
 
 	bool OnMouseClick(Vector2D position, MouseButton button)
 	{
-		g_outputBox->AppendText(GetText());
-		g_outputBox->AppendText(TEXT(" was pressed!\n"));
+		g_outputBox->AppendText(2, GetText(), TEXT(" was pressed!\n"));
 
 		g_otherButton->SetEnabled(true);
 		g_otherButton = this;
