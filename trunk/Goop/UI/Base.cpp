@@ -9,7 +9,7 @@
 
 using namespace Goop;
 
-Base::Base() : m_background(0), m_font(0), m_text(0), m_position(0, 0), m_size(0, 0), m_handle(0), m_parent(0), m_defaultProcess(0)
+Base::Base() : m_created(0), m_background(0), m_font(0), m_text(0), m_position(0, 0), m_size(0, 0), m_handle(0), m_parent(0), m_defaultProcess(0)
 {
 
 }
@@ -26,7 +26,6 @@ void Base::InitializeBase()
 {
 	SetWindowLongPtr(m_handle, GWLP_USERDATA, (LONG_PTR)this);
 	SetFont(Font::GetDefault());
-	OnCreate();
 }
 
 void Base::Show()
@@ -184,6 +183,12 @@ HWND Base::GetHandle()
 
 void Base::Update()
 {
+	if(!m_created)
+	{
+		OnCreate();
+		m_created = true;
+	}
+
 	MSG msg;
 	while(PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 	{

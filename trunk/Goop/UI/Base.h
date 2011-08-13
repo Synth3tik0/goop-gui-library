@@ -77,6 +77,7 @@ namespace Goop
 		GOOP_API void InitializeBase();
 		GOOP_API static LRESULT Process(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);
 
+		bool m_created;
 		wchar_t *m_text;
 		HBRUSH m_background;
 		LONG_PTR m_defaultProcess;
