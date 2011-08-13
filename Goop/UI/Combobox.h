@@ -17,8 +17,11 @@ namespace Goop
 	class BaseCombobox : public Base
 	{
 	protected:
+		ComboData m_comboData;
 		GOOP_API BaseCombobox(Base *parent = 0, DWORD style = 0);
 		GOOP_API ~BaseCombobox();
+		
+		GOOP_API void InitializeBase();		
 
 	public:
 		GOOP_API virtual unsigned int GetCurrentSelection();
@@ -30,9 +33,6 @@ namespace Goop
 		GOOP_API virtual void OnSelectionChanged(unsigned int index);
 		GOOP_API static LRESULT ListProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);	
 		GOOP_API static LRESULT ItemProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam, LPARAM lParam);	
-	
-	private:
-		ComboData m_comboData;
 	};
 
 	class Combobox : public BaseCombobox

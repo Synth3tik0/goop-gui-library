@@ -12,27 +12,35 @@ BaseCombobox::BaseCombobox(Base *parent, DWORD style)
 
 	m_handle = (HWND)CreateWindowExW(0, WC_COMBOBOXW, L"", style | CBS_HASSTRINGS, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, instanceHandle, 0);
 	
-	InitializeBase();
 	m_defaultProcess = SetWindowLongPtr(m_handle, GWLP_WNDPROC, (LONG_PTR)Base::Process);
 
 	SetParent(parent);
-	
-	COMBOBOXINFO info;
-	info.cbSize = sizeof(COMBOBOXINFO);
-	GetComboBoxInfo(m_handle, &info);
-	
-	m_comboData.listProc = (LONG_PTR)SetWindowLongPtr(info.hwndList, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ListProcess);
-	m_comboData.itemProc = (LONG_PTR)SetWindowLongPtr(info.hwndItem, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ItemProcess);
-	m_comboData.parent = this;
-
-	SetWindowLongPtr(info.hwndItem, GWLP_USERDATA, (LONG_PTR)&m_comboData);
-	SetWindowLongPtr(info.hwndList, GWLP_USERDATA, (LONG_PTR)&m_comboData);
 	Show();
 }
 
 BaseCombobox::~BaseCombobox()
 {
 	
+}
+
+void BaseCombobox::InitializeBase()
+{
+	Base::InitializeBase(); 
+	COMBOBOXINFO info;
+	info.cbSize = sizeof(COMBOBOXINFO);
+	GetComboBoxInfo(m_handle, &info);
+
+	SetWindowLongPtr(info.hwndList, GWLP_USERDATA, (LONG_PTR)&m_comboData);
+
+	m_comboData.listProc = (LONG_PTR)SetWindowLongPtr(info.hwndList, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ListProcess);
+
+	if(info.hwndCombo != info.hwndItem)
+	{
+		SetWindowLongPtr(info.hwndItem, GWLP_USERDATA, (LONG_PTR)&m_comboData);
+		m_comboData.itemProc = (LONG_PTR)SetWindowLongPtr(info.hwndItem, GWLP_WNDPROC, (LONG_PTR)BaseCombobox::ItemProcess);
+	}
+
+	m_comboData.parent = this;	
 }
 
 void BaseCombobox::AddItem(const wchar_t *item)
@@ -108,6 +116,6 @@ LRESULT BaseCombobox::ItemProcess(HWND hWindow, unsigned int uMsg, WPARAM wParam
 	return CallWindowProc((WNDPROC)data->itemProc, hWindow, uMsg, wParam, lParam);
 }
 
-Combobox::Combobox(Base *parent) : BaseCombobox(parent, CBS_DROPDOWN) {}
-Listbox::Listbox(Base *parent) : BaseCombobox(parent, CBS_DROPDOWNLIST) {}
-List::List(Base *parent) : BaseCombobox(parent, CBS_SIMPLE) {}
+Combobox::Combobox(Base *parent) : BaseCombobox(parent, CBS_DROPDOWN) { InitializeBase(); }
+Listbox::Listbox(Base *parent) : BaseCombobox(parent, CBS_DROPDOWNLIST) { InitializeBase(); }
+List::List(Base *parent) : BaseCombobox(parent, CBS_SIMPLE) { InitializeBase(); }
