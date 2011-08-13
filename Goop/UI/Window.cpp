@@ -32,6 +32,14 @@ const wchar_t *Window::GetTitle()
 	return GetText();
 }
 
+Vector2D Window::GetClientSize()
+{
+	RECT rect;
+	GetClientRect(m_handle, &rect);
+
+	return Vector2D(rect.right - rect.left, rect.bottom - rect.top);
+}
+
 void Window::Maximize()
 {
 	::ShowWindow(m_handle, SW_MAXIMIZE);

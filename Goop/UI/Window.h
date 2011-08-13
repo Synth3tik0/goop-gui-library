@@ -15,6 +15,7 @@ namespace Goop
 
 		GOOP_API void SetTitle(const wchar_t *title);
 		GOOP_API const wchar_t *GetTitle();
+		GOOP_API Vector2D GetClientSize();
 
 		GOOP_API void Maximize();
 		GOOP_API void Minimize();
